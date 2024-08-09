@@ -9,8 +9,12 @@ import InputAdornment from '@mui/material/InputAdornment';
 import Visibility from '@mui/icons-material/Visibility';
 import VisibilityOff from '@mui/icons-material/VisibilityOff';
 import './Login.scss'
+import { useLocation, useNavigate } from 'react-router-dom';
+import { LoginPost, RegisterPost } from '../../services/UserServices';
 
 function Login() {
+    const location = useLocation()
+    const navigate = useNavigate()
     const [showPassword, setShowPassword] = React.useState(false);
     const [loginObj, setLoginObj] = React.useState({
         email: '',
@@ -28,12 +32,14 @@ function Login() {
         passwordError: ''
     });
     const [errSignUpObj, setErrSignUpObj] = React.useState({
-        fullNameError : '',
-        emailError : '',
+        fullNameError: '',
+        emailError: '',
         passwordError: '',
-        mobileNumberError : ''
+        mobileNumberError: ''
     })
-    const [isLogin, setIsLogin] = React.useState(true)
+    // const [isLogin, setIsLogin] = React.useState(true)
+
+    const isLogin = location.pathname === '/login'
 
     const handleChange = (e) => {
         const { name, value } = e.target;
@@ -51,8 +57,8 @@ function Login() {
     };
 
     const handleChangePassword = (e) => {
-        const {value} = e.target
-        if(isLogin) {
+        const { value } = e.target
+        if (isLogin) {
             setLoginObj((prev) => ({
                 ...prev,
                 password: value
@@ -82,8 +88,20 @@ function Login() {
         }
 
         setErrLoginObj(newErrObj);
-        if(isValidField) {
-            console.log('Login Success');
+        if (isValidField) {
+            console.log(loginObj);
+            LoginPost(loginObj).then((response) => {
+                console.log(response); 
+                const token = response.data.result.accessToken; 
+                localStorage.setItem("token", token);
+                console.log('Login success');
+                navigate('/')
+
+                console.log(token);
+            })
+                .catch((error) => {
+                    console.log(error);
+                })
         }
     }
 
@@ -119,17 +137,29 @@ function Login() {
         setErrSignUpObj(newErrObj);
 
         if (isValidField) {
-            // Handle signup logic here
-            console.log('Signup successful');
-            setIsLogin(true)
+            console.log(isValidField);
+            RegisterPost(signupObj)
+                .then((response) => {
+                    console.log(response);
+                    console.log('Signup success');
+                    // setIsLogin(true)
+                    navigate('/login')
+                })
+                .catch((error) => {
+                    console.log("Error", error);
+                })
+
         }
     }
     const handleClickShowPassword = () => {
         setShowPassword(!showPassword);
     };
 
-   
-     const style = {
+    const handleNavigation = (path) => {
+        navigate(path);
+    };
+
+    const style = {
         position: 'absolute',
         top: '50%',
         left: '50%',
@@ -152,8 +182,20 @@ function Login() {
                 </div>
                 <div className='login-signup-form-cnt'>
                     <div className='login-signup-head-cont'>
-                        <p onClick={() => setIsLogin(true)}>LOGIN</p>
-                        <p onClick={() => setIsLogin(false)}>SIGNUP</p>
+                        {/* <p onClick={() => setIsLogin(true)}>LOGIN</p> */}
+                        {/* <p onClick={() => setIsLogin(false)}>SIGNUP</p> */}
+                        <p
+                            className={isLogin ? 'active' : ''}
+                            onClick={() => handleNavigation('/login')}
+                        >
+                            LOGIN
+                        </p>
+                        <p
+                            className={!isLogin ? 'active' : ''}
+                            onClick={() => handleNavigation('/signup')}
+                        >
+                            SIGNUP
+                        </p>
                     </div>
                     {isLogin ? (
                         <>
@@ -208,7 +250,7 @@ function Login() {
                             <div className='or-cnt'>
                                 <hr className='left-hori-line-cnt'></hr>
                                 <p>OR</p>
-                                <hr  className='left-hori-line-cnt' ></hr>
+                                <hr className='left-hori-line-cnt' ></hr>
                             </div>
 
                             <div className='facebook-google-btn-cnt'>
@@ -284,7 +326,6 @@ function Login() {
                                     }}
                                     inputProps={{ style: { height: 8 } }}
                                 />
-                                <p className='forgot-txt'> Forgot Password</p>
                             </div>
                             <div className='mbl-num-cnt'>
                                 <p>Mobile Number</p>
@@ -305,7 +346,7 @@ function Login() {
                                 color: '#FFFFFF',
                                 textTransform: 'none'
                             }} onClick={handleSignUp} >SignUp</Button>
-                            
+
                         </>
                     )}
                 </div>
