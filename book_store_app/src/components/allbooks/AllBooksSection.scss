@@ -1,0 +1,42 @@
+* {
+    margin: 0;
+    padding: 0;
+}
+.allbooks-count-sort-main-cnt{
+    // display: flex;
+    padding: 0px 150px 0px 150px;
+}
+.allbooks-count-sort-opt-cnt {
+    display: flex;
+    justify-content: space-between;
+   
+    height: 60px;
+}
+
+.allbooks-total-count-cnt {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+   
+    gap: 5px;
+}
+.allbooks-book-text {
+    color: #0A0102;
+    font: normal normal normal 30px/25px Roboto;
+}
+.allbooks-book-count-text{
+    color: #9D9D9D;
+    padding-top: 5px;
+}
+.allbooks-main-cnt {
+    width: 74.51%;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 20px;
+}
+
+.css-wjh20t-MuiPagination-ul {
+    justify-content: center;
+    margin: 30px 0px 40px 0px;
+}
+ 

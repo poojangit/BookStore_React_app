@@ -1,0 +1,92 @@
+* {
+    margin: 0;
+    padding: 0;
+}
+.book-main-cnt {
+    margin-top: 20px;
+    background: #ffffff 0% 0% no-repeat padding-box;
+    border: 1px solid #e2e2e2;
+    border-radius: 3px;
+    opacity: 1;
+    // display: flex;
+    // padding: 30px;
+}
+.book-img-cnt {
+    // border: 2px solid khaki;
+    background: #f5f5f5 0% 0% no-repeat padding-box;
+    border-radius: 2px 2px 0px 0px;
+    opacity: 1;
+    width: 233px;
+    height: 172px;
+    justify-content: center;
+    display: flex;
+    padding: 50px;
+}
+.bookdetails-main-cnt {
+    padding: 20px;
+}
+.bookdetails-book-name {
+    text-align: left;
+    font: normal normal normal 21px/32px Roboto;
+    letter-spacing: 0px;
+    color: #0a0102;
+    opacity: 1;
+}
+.bookdetails-author-name {
+    font: normal normal normal 16px/14px Roboto;
+    letter-spacing: 0px;
+    color: #878787;
+    opacity: 1;
+    margin-top: 3px;
+}
+.bookdetail-rating-review-cnt {
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+    margin-top: 10px;
+    gap: 5px;
+
+    .bookdetail-rating-cnt {
+        display: flex;
+        justify-content: flex-start;
+        align-items: center;
+        background: #388e3c 0% 0% no-repeat padding-box;
+        border-radius: 1px;
+        opacity: 1;
+        color: #ffffff;
+        width: 38px;
+        height: 23px;
+        font-size: small;
+        padding: 1px 7px 1px 7px;
+        gap: 2px;
+    }
+    .bookdetail-review-cnt {
+        text-align: left;
+        font: normal normal normal 18px/15px Roboto;
+        letter-spacing: 0px;
+        color: #878787;
+        opacity: 1;
+    }
+}
+.bookdetail-discnt-ori-price-cnt {
+    display: flex;
+    justify-content: flex-start;
+    margin-top: 8px;
+    gap: 10px;
+
+    .bookdetail-discnt-price {
+        text-align: left;
+        font: normal normal bold 17px/17px Roboto;
+        letter-spacing: 0px;
+        color: #0a0102;
+        opacity: 1;
+    }
+    .bookdetail-actual-price {
+        text-align: left;
+        text-decoration: line-through;
+        font: normal normal normal 16px/17px Roboto;
+        letter-spacing: 0px;
+        color: #878787;
+        opacity: 1;
+    }
+}
