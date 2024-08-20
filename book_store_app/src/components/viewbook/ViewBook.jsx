@@ -9,6 +9,8 @@ import Rating from '@mui/material/Rating';
 import Typography from '@mui/material/Typography';
 import Stack from '@mui/material/Stack';
 import TextField from '@mui/material/TextField';
+import FavoriteIcon from '@mui/icons-material/Favorite';
+
 
 function ViewBook() {
     const navigate = useNavigate()
@@ -44,8 +46,8 @@ function ViewBook() {
                                 <img src={bookImage} />
                             </div>
                             <div className='view-image-add-wish-opt-cnt'>
-                                <Button variant="contained" className="book-view-addtobag-btn">ADD TO BAG</Button>
-                                <Button variant="contained" className="book-view-addtobag-btn">WISHLIST</Button>
+                                <Button variant="contained" className="book-view-addtobag-btn" sx={{ width : "200px" , backgroundColor: "#A03037" }}>ADD TO BAG</Button>
+                                <Button variant="contained" className="book-view-addtobag-btn" sx={{ width: "200px" , backgroundColor: "#333333"}}> <FavoriteIcon sx={{marginRight : "8px", width: "20px"}}/>WISHLIST</Button>
                             </div>
                         </div>
                     </div>
@@ -63,8 +65,8 @@ function ViewBook() {
 
                         <hr />
                         <div className="book-view-descrp-cnt">
-                            <p> Book Detail</p>
-                            <p>Lorem, ipsum dolor sit amet consectetur adipisicing elit. Corporis vero deleniti cum molestiae. Et porro soluta repudiandae ipsam dolor distinctio natus veritatis ab cumque, autem vel cupiditate est voluptatem magni.
+                            <p className="book-view-head-title"> Book Detail</p>
+                            <p className="book-view-para">Lorem, ipsum dolor sit amet consectetur adipisicing elit. Corporis vero deleniti cum molestiae. Et porro soluta repudiandae ipsam dolor distinctio natus veritatis ab cumque, autem vel cupiditate est voluptatem magni.
                                 Lorem ipsum dolor sit amet, consectetur adipisicing elit. Earum id tempore, dolores exercitationem animi repellendus possimus deleniti omnis eius veritatis doloribus temporibus iure dolorum cupiditate iusto commodi minus ab optio.
                             </p>
                         </div>
@@ -72,9 +74,9 @@ function ViewBook() {
                         <div className="book-view-cust-feebk-main-cnt">
                             <p>Customer Feedback</p>
                             <div className="book-view-opt-rating-main-cnt">
-                                <Typography component="legend">Overall rating</Typography>
+                                <Typography component="legend" sx={{fontSize: "15px"}}>Overall rating</Typography>
                                 <Stack spacing={1} id="bookView-customerrating-star-main-cnt">
-                                    <Rating name="size-medium" defaultValue={1} onChange={(e) => setRating(e.target.value)} />
+                                    <Rating name="size-medium" defaultValue={0} onChange={(e) => setRating(e.target.value)} />
                                 </Stack>
                                 <TextField
                                     id="outlined-multiline-static"
@@ -82,7 +84,11 @@ function ViewBook() {
                                     multiline
                                     rows={4}
                                     placeholder="write your review"
+                                    sx={{backgroundColor: "white", borderColor: "white"}}
                                 />
+                                <div className="book-view-submit-btn">
+                                <Button variant="contained">Submit</Button>
+                                </div>
                             </div>
                         </div>
 

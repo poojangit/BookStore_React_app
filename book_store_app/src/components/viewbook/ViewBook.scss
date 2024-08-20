@@ -23,25 +23,160 @@
         font: 18px/30px Roboto;
     }
 }
-.view-book-inner-main-cnt{
+.view-book-inner-main-cnt {
     display: flex;
     justify-content: center;
+    // gap: 20px;
 }
-.view-book-img-main-cnt{
+.view-book-img-main-cnt {
     display: flex;
     justify-content: center;
+    gap: 10px;
 }
 .view-book-small-img-cnt {
     display: flex;
     flex-direction: column;
+    // gap: 5px;
 }
-.view-book-1st-small-img{
-    img {
-        height: 20%;
+.view-book-1st-small-img,
+.view-book-2nd-small-img {
+    width: 60px;
+    height: 80px;
+    border: 2px solid #d1d1d1;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+.view-book-1st-small-img img,
+.view-book-2nd-small-img img {
+    width: 80%;
+    height: 80%;
+    object-fit: cover;
+}
+.view-book-large-img-cnt {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 408px;
+    height: 523px;
+    border: 2px solid #d1d1d1;
+}
+
+.view-book-large-img-cnt img {
+    width: 80%;
+    height: 84%;
+    // object-fit: cover;
+}
+
+.view-image-add-wish-opt-cnt {
+    display: flex;
+    // flex-direction: column;
+    justify-content: space-between;
+    gap: 10px;
+    margin-top: 20px;
+}
+
+.book-view-details-main-cnt {
+    display: flex;
+    flex-direction: column;
+    padding: 0 20px;
+}
+.book-view-book-name {
+    text-align: left;
+    font: normal normal normal 36px / 41px STATUS-BAR;
+    letter-spacing: 0px;
+    color: #0a0102;
+    opacity: 1;
+}
+.book-view-author-name {
+    font: normal normal normal 20px/19px Roboto;
+    letter-spacing: 0px;
+    color: #878787;
+    opacity: 1;
+    margin-top: 3px;
+}
+.book-view-rating-review-cnt {
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+    margin-top: 7px;
+    gap: 5px;
+    .book-view-rating-cnt {
+        display: flex;
+        justify-content: flex-start;
+        align-items: center;
+        background: #388e3c 0% 0% no-repeat padding-box;
+        border-radius: 1px;
+        opacity: 1;
+        color: #ffffff;
+        width: 38px;
+        height: 23px;
+        font-size: small;
+        padding: 1px 7px 1px 7px;
+        gap: 2px;
+    }
+    .book-view-review-cnt {
+        text-align: left;
+        font: normal normal normal 18px/15px Roboto;
+        letter-spacing: 0px;
+        color: #878787;
+        opacity: 1;
     }
 }
-.view-book-2nd-small-img{
-    img {
-        height: 20%;
+.book-view-discnt-ori-price-cnt {
+    display: flex;
+    justify-content: flex-start;
+    margin-top: 8px;
+    gap: 15px;
+    padding-bottom: 15px;
+    .book-view-discnt-price {
+        text-align: left;
+        font: normal normal bold 36px/52px Roboto;
+        letter-spacing: 0px;
+        color: #0a0102;
+        opacity: 1;
     }
+    .book-view-actual-price {
+        text-align: left;
+        text-decoration: line-through;
+        font: normal normal normal 21px/52px Roboto;
+        letter-spacing: 0px;
+        color: #878787;
+        opacity: 1;
+    }
+}
+.book-view-descrp-cnt {
+    padding-top: 30px;
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+    padding-bottom: 45px;
+    .book-view-head-title {
+        color: #878787;
+    }
+    .book-view-para {
+        color: #373434;
+    }
+}
+.book-view-cust-feebk-main-cnt {
+    display: flex;
+    flex-direction: column;
+    margin-top: 20px;
+
+    p {
+        font-size: larger;
+        padding-bottom: 15px;
+    }
+}
+.book-view-opt-rating-main-cnt{
+    background-color: #F5F5F5;
+    padding: 20px;
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+}
+.book-view-submit-btn{
+    display: flex;
+    justify-content: flex-end;
+    padding-top: 15px;
 }
