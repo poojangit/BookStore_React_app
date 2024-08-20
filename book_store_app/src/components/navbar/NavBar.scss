@@ -37,7 +37,9 @@
     display: flex;
     flex-direction: column;
     gap: 3px;
-
+    :hover {
+        cursor: pointer;
+    }
     align-items: center;
     .profile-icon {
         width: 20px;
@@ -75,16 +77,21 @@
     gap: 20px;
 }
 
-.profile-after-login-icon-cnt, .profile-before-login-icon-cnt {
+.profile-after-login-icon-cnt,
+.profile-before-login-icon-cnt {
     display: flex;
     align-items: center;
     gap: 10px;
-    p{
+    :hover {
+        cursor: pointer;
+    }
+    p {
         color: #9d9d9d;
     }
 }
-.profile-after-login-welcome-txt, .profile-before-login-welcome-txt{
-    font-weight: 600 ;
+.profile-after-login-welcome-txt,
+.profile-before-login-welcome-txt {
+    font-weight: 600;
 }
 .profile-before-login-cnt {
     padding: 10px 40px 30px 40px;
@@ -94,7 +101,61 @@
     gap: 10px;
     width: 300px;
 }
-.profile-before-login-txt{
+.profile-before-login-txt {
     color: #9d9d9d;
     font-size: 15px;
+}
+
+@media only screen and (min-width: 300px) and (max-width: 600px) {
+    .navbar-main-cnt {
+        padding: 15px 20px;
+        height: 0%;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        gap: 10px;
+    }
+
+    .navbar-logo-search-main-cnt {
+        flex-direction: column;
+        align-items: center;
+        gap: 10px;
+    }
+
+    .navbar-logo-main-cnt {
+        gap: 10px;
+        justify-content: center;
+    }
+
+    .navbar-profile-cart-main-cnt {
+        gap: 20px;
+        flex-direction: row;
+        justify-content: center;
+    }
+
+    .navbar-profile-main-cnt,
+    .navbar-cart-main-cnt {
+        flex-direction: row;
+        gap: 5px;
+        align-items: center;
+    }
+
+    .profile-after-login-cnt,
+    .profile-before-login-cnt {
+        padding: 10px 20px;
+        align-items: center;
+        gap: 10px;
+        width: 100%;
+    }
+
+    .profile-after-login-icon-cnt,
+    .profile-before-login-icon-cnt {
+        gap: 5px;
+        justify-content: center;
+    }
+
+    .profile-before-login-txt {
+        font-size: 14px;
+        text-align: center;
+    }
 }

@@ -8,8 +8,40 @@
     border: 1px solid #e2e2e2;
     border-radius: 3px;
     opacity: 1;
+    transition: box-shadow 0.3s ease-in-out;
+    position: relative;
+
+    &:hover {
+        box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+        cursor: pointer;
+
+        .quick-open-dialog {
+            display: block; 
+        }
+    }
     // display: flex;
     // padding: 30px;
+}
+.quick-open-dialog {
+    display: none; /* Initially hide the dialog */
+    position: absolute; 
+    top: 58%;
+    left: 50%;
+    transform: translateX(-50%);
+    background: #6d6d6d;
+    border: 1px solid #6d6d6d;;
+    // box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    padding: 10px;
+    border-radius: 4px;
+    z-index: 10;
+    width: 200px; 
+    p{
+        background-color:#6d6d6d;;
+        color: #ffffff;
+        text-transform: uppercase;
+        display: flex;
+        justify-content: center;
+    }
 }
 .book-img-cnt {
     // border: 2px solid khaki;
@@ -88,5 +120,80 @@
         letter-spacing: 0px;
         color: #878787;
         opacity: 1;
+    }
+}
+@media only screen and (max-width: 600px) {
+    .book-img-cnt {
+        width: 180px;
+        height: 130px;
+        padding: 20px;
+    }
+
+    .bookdetails-main-cnt {
+        padding: 15px;
+    }
+
+    .bookdetails-book-name {
+        font-size: 18px;
+    }
+
+    .bookdetails-author-name {
+        font-size: 14px;
+    }
+
+    .bookdetail-rating-cnt {
+        width: 30px;
+        height: 20px;
+        font-size: 14px;
+    }
+
+    .bookdetail-review-cnt {
+        font-size: 16px;
+    }
+
+    .bookdetail-discnt-price {
+        font-size: 15px;
+    }
+
+    .bookdetail-actual-price {
+        font-size: 14px;
+    }
+}
+
+@media only screen and (max-width: 300px) {
+    .book-img-cnt {
+        width: 180px;
+        height: 130px;
+        padding: 20px;
+    }
+
+    .bookdetails-main-cnt {
+        padding: 10px;
+    }
+
+    .bookdetails-book-name {
+        font-size: 16px;
+    }
+
+    .bookdetails-author-name {
+        font-size: 12px;
+    }
+
+    .bookdetail-rating-cnt {
+        width: 28px;
+        height: 18px;
+        font-size: 12px;
+    }
+
+    .bookdetail-review-cnt {
+        font-size: 14px;
+    }
+
+    .bookdetail-discnt-price {
+        font-size: 14px;
+    }
+
+    .bookdetail-actual-price {
+        font-size: 13px;
     }
 }

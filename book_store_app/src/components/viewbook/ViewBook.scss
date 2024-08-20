@@ -1,0 +1,47 @@
+* {
+    margin: 0;
+    padding: 0;
+}
+
+.view-book-main-cnt {
+    padding: 0px 150px 0px 150px;
+}
+.view-book-home-or-book-qnty-cnt {
+    display: flex;
+    padding: 25px 0px 5px 0px;
+    gap: 6px;
+    :hover {
+        cursor: pointer;
+    }
+    .home-cnt {
+        color: #9d9d9d;
+        font: 18px/30px Roboto;
+    }
+
+    .book-qnty-cnt {
+        color: black;
+        font: 18px/30px Roboto;
+    }
+}
+.view-book-inner-main-cnt{
+    display: flex;
+    justify-content: center;
+}
+.view-book-img-main-cnt{
+    display: flex;
+    justify-content: center;
+}
+.view-book-small-img-cnt {
+    display: flex;
+    flex-direction: column;
+}
+.view-book-1st-small-img{
+    img {
+        height: 20%;
+    }
+}
+.view-book-2nd-small-img{
+    img {
+        height: 20%;
+    }
+}

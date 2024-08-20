@@ -10,6 +10,8 @@ import ShoppingCartOutlinedIcon from '@mui/icons-material/ShoppingCartOutlined';
 import MarkunreadMailboxOutlinedIcon from '@mui/icons-material/MarkunreadMailboxOutlined';
 import FavoriteBorderOutlinedIcon from '@mui/icons-material/FavoriteBorderOutlined';
 import Button from '@mui/material/Button';
+import { useNavigate } from 'react-router-dom';
+import AllBooks from '../allbooks/AllBooks';
 
 const SearchIconWrapper = styled('div')(({ theme }) => ({
     padding: theme.spacing(0, 2),
@@ -36,6 +38,14 @@ const Search = styled('div')(({ theme }) => ({
         marginLeft: theme.spacing(3),
         width: 'auto',
     },
+    [theme.breakpoints.down('sm')]: {
+        width: '100%', 
+        marginRight: 0, 
+        marginLeft: 0, 
+    },
+    [theme.breakpoints.down('xs')]: {
+        width: '100%', 
+    },
 }));
 
 const StyledInputBase = styled(InputBase)(({ theme }) => ({
@@ -52,6 +62,7 @@ const StyledInputBase = styled(InputBase)(({ theme }) => ({
     },
 }));
 function NavBar() {
+    const navigate = useNavigate()
     const [anchorEl, setAnchorEl] = React.useState(null);
     const open = Boolean(anchorEl);
     const token = localStorage.getItem('token')
@@ -110,7 +121,7 @@ function NavBar() {
                                     <PersonOutlineOutlinedIcon style={{
                                         color : '#878787'
                                     }}/>
-                                    <p>Profile</p>
+                                    <p onClick={() => navigate('/profile')}>Profile</p>
                                 </div>
                                 <div className='profile-after-login-icon-cnt'>
                                     <MarkunreadMailboxOutlinedIcon style={{

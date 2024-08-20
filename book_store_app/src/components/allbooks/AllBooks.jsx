@@ -1,5 +1,5 @@
 import React from 'react';
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import FormControl from '@mui/material/FormControl';
 import InputLabel from '@mui/material/InputLabel';
 import Select, { SelectChangeEvent } from '@mui/material/Select';
@@ -8,15 +8,32 @@ import './AllBooksSection.scss'
 import Books from '../books/Books';
 import Pagination from '@mui/material/Pagination';
 import Stack from '@mui/material/Stack';
+import { useSelector } from 'react-redux';
+import { Store } from '@mui/icons-material';
+// import BookStore from '../../bookstore/BookStore';
 
-function AllBooksSection() {
+function AllBooks() {
     const [bookList, setBookList] = useState([])
+    const BookListDetails = useSelector((store) => store.allBookStore.AllBooks || [])
     const [bookCount, setBookCount] = useState(bookList.length)
     const [currentPage, setCurrentPage] = useState(1);
+    const [sortValue, setSortValue] = useState('');
     const itemsPerPage = 8;
+
+
+    useEffect(() => {
+        if (BookListDetails.length) {
+            setBookCount(BookListDetails.length);
+            setBookList(BookListDetails);
+        }
+    }, [BookListDetails]);
+
 
     const handlePageChange = (event, value) => {
         setCurrentPage(value);
+    };
+    const handleSortChange = (event) => {
+        setSortValue(event.target.value); // Update the state with selected value
     };
     const startIndex = (currentPage - 1) * itemsPerPage;
     const endIndex = startIndex + itemsPerPage;
@@ -36,6 +53,8 @@ function AllBooksSection() {
                         <Select
                             labelId="demo-select-small-label"
                             id="demo-select-small"
+                            value={sortValue} // Use the state variable
+                            onChange={handleSortChange} // Update the state on change
                             label="Sort by relevance"
                         >
                             <MenuItem value="">
@@ -61,4 +80,4 @@ function AllBooksSection() {
     );
 }
 
-export default AllBooksSection;
+export default AllBooks;
