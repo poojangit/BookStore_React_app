@@ -8,6 +8,8 @@ import Dashboard from '../components/dashboard/Dashboard';
 import Profile from '../components/profile/Profile';
 import AllBooks from '../components/allbooks/AllBooks';
 import ViewBook from '../components/viewbook/ViewBook';
+import Cart from '../components/cart/Cart';
+import Wishlist from '../components/wishlist/WishList';
 
 function Router() {
   return (
@@ -20,6 +22,8 @@ function Router() {
             <Route path= '/' element={<AllBooks/>}/>
             <Route path='profile' element= {<Profile/>}/>
             <Route path = 'bookdetails/:bookid' element = {<ViewBook/>}/>
+            <Route path='cart' element = {<Cart/>}/>
+            <Route path='wishlist' element ={<Wishlist/>}/>
           </Route>
         </Routes>
       </BrowserRouter>

@@ -169,7 +169,7 @@ function NavBar() {
 
                     </Menu>
 
-                    <div className='navbar-cart-main-cnt'>
+                    <div className='navbar-cart-main-cnt' onClick={() => navigate(`/cart`)}>
 
                         <ShoppingCartOutlinedIcon className='cart-icon' />
                         <p>Cart</p>

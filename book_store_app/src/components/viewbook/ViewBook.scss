@@ -25,13 +25,14 @@
 }
 .view-book-inner-main-cnt {
     display: flex;
-    justify-content: center;
-    // gap: 20px;
+    justify-content: flex-start;
+    align-items: flex-start;
+    gap: 50px;
 }
 .view-book-img-main-cnt {
     display: flex;
     justify-content: center;
-    gap: 10px;
+    gap: 20px;
 }
 .view-book-small-img-cnt {
     display: flex;
@@ -80,6 +81,7 @@
     display: flex;
     flex-direction: column;
     padding: 0 20px;
+    width: 43%;
 }
 .book-view-book-name {
     text-align: left;
@@ -179,4 +181,8 @@
     display: flex;
     justify-content: flex-end;
     padding-top: 15px;
+}
+.book-view-comment-inpt{
+    background-color: #F5F5F5;
+
 }
