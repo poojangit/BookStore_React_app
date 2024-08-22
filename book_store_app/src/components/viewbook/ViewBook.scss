@@ -170,6 +170,31 @@
         padding-bottom: 15px;
     }
 }
+.book-view-cust-review-main-cnt {
+    display: flex;
+    flex-direction: column;
+    padding-top: 20px;
+}
+.book-view-cust-review-cnt {
+    display: flex;
+    flex-direction: column;
+    margin: 20px 0px 20px 0px;
+    gap: 5px;
+}
+.book-view-cust-review-rating {
+    padding-left: 45px;
+}
+.book-view-cust-name-rating-cnt {
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
+}
+.book-view-cust-avtar-name-cnt {
+    display: flex;
+    justify-content: start;
+    align-items: center;
+    gap: 10px;
+}
 .book-view-opt-rating-main-cnt{
     background-color: #F5F5F5;
     padding: 20px;
@@ -185,4 +210,9 @@
 .book-view-comment-inpt{
     background-color: #F5F5F5;
 
+}
+.book-view-cust-review-para {
+    color: #707070;
+    font-size: medium;
+    padding-left: 45px;
 }

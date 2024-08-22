@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { Children, useEffect, useState } from "react";
 import './ViewBook.scss';
 import { useNavigate, useParams } from 'react-router-dom';
 import bookImage from '../../assets/book_image1.png';
@@ -16,6 +16,7 @@ import { toast } from "react-toastify";
 import { addToWishListApi, getFeedbackApi, getAllCartDetailsApi, postFeedbackApi, removeWishListApi, updateCartApi } from "../../services/BookServices";
 import { addItemToWishList, deleteItemFromWishList } from "../../store/WishListSlice";
 import { addBookToCart, decreaseQuantity, increaseQuantity, updateQuantity } from '../../store/CartSlice';
+import Avatar from '@mui/material/Avatar';
 
 function ViewBook() {
     const token = localStorage.getItem('token');
@@ -123,6 +124,22 @@ function ViewBook() {
         }
     }
 
+      function stringAvatar(name) {
+        if (!name) {
+            return ; 
+        }
+    
+        const initials = name.split(' ').map(word => word[0]).join('').toUpperCase();
+        return {
+            children: initials,
+            style : {
+                backgroundColor : "#E4E4E4",
+                color : "#707070",
+                fontSize : "15px"
+            }
+        };
+    }
+
     return (
         <>
             <div className='view-book-main-cnt'>
@@ -198,18 +215,18 @@ function ViewBook() {
                                     onChange={e => setComment(e.target.value)}
                                     InputProps={{
                                         style: {
-                                            backgroundColor: 'white', 
-                                            borderColor : "none"
+                                            backgroundColor: 'white',
+                                            borderColor: "none"
                                         },
                                     }}
                                     sx={{
                                         '& .MuiOutlinedInput-root': {
                                             '& fieldset': {
-                                                border: 'none', 
+                                                border: 'none',
                                             },
                                         },
                                         '& .MuiInputBase-root': {
-                                            backgroundColor: 'white', 
+                                            backgroundColor: 'white',
                                         },
                                     }}
                                 />
@@ -222,9 +239,18 @@ function ViewBook() {
                             {feedbackList?.map((feedback, index) => (
                                 <div key={index} className='book-view-cust-review-cnt'>
                                     <div className='book-view-cust-name-rating-cnt'>
-                                        <div className='book-view-cust-name'>{feedback.user_id?.fullName || 'Anonymous'}</div>
+                                        <div className="book-view-cust-avtar-name-cnt">
+                                        <Avatar {...stringAvatar(feedback.user_id?.fullName || 'Anonymous')} />
+                                            <div className='book-view-cust-name'>{feedback.user_id?.fullName || 'Anonymous'}</div>
+                                        </div>
+
                                         <div className='book-view-cust-review-rating'>
-                                            <StarOutlinedIcon sx={{ color: 'white', width: 15 }} id='book-details-bookrating-star' />{feedback.rating}
+                                            <Rating
+                                                name="simple-controlled"
+                                                value={feedback.rating}
+                                                readOnly
+                                            />
+
                                         </div>
                                     </div>
                                     <div className='book-view-cust-review-para'>{feedback.comment}</div>

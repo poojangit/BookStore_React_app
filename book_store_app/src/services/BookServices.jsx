@@ -40,6 +40,8 @@ export const addToCartApi = async (id) => {
 };
 
 export const updateCartApi = async (id, quantity) => {
+    console.log(id);
+    console.log(quantity);
     const res = await axios.put(
         `https://bookstore.incubation.bridgelabz.com/bookstore_user/cart_item_quantity/${id}`,
         { quantityToBuy: quantity },
@@ -49,6 +51,7 @@ export const updateCartApi = async (id, quantity) => {
 };
 
 export const removeCartApi = async (id) => {
+    console.log(id);
     const res = await axios.delete(
         `https://bookstore.incubation.bridgelabz.com/bookstore_user/remove_cart_item/${id}`,
         headerConfig()
@@ -94,11 +97,7 @@ export const getFeedbackApi = async (id) => {
     );
     // console.log(response.data);
     return response;
-    // const res = await axios.get(
-    //     `https://bookstore.incubation.bridgelabz.com/bookstore_user/get/feedback/${id}`,
-    //     headerConfig()
-    // );
-    // return res.data.result;
+
 };
 
 export const postFeedbackApi = async (id, data) => {

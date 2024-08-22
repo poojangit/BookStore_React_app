@@ -36,34 +36,36 @@
 .navbar-profile-main-cnt {
     display: flex;
     flex-direction: column;
-    gap: 3px;
+    gap: 6px;
     :hover {
         cursor: pointer;
     }
     align-items: center;
     .profile-icon {
-        width: 20px;
-        height: 20px;
+        width: 62px;
+        height: 29px;
         color: white;
     }
     p {
         color: white;
-        font: normal normal normal 13px/17px Roboto;
+        font: normal normal normal 15px/17px Roboto;
     }
 }
 .navbar-cart-main-cnt {
     display: flex;
     flex-direction: column;
-    gap: 3px;
+    // gap: 0px;
     align-items: center;
+    width: 43px;
+    height: 63px;
     .cart-icon {
-        width: 20px;
-        height: 20px;
+        // width: 62px;
+        height: 39px;
         color: white;
     }
     p {
         color: white;
-        font: normal normal normal 13px/17px Roboto;
+        font: normal normal normal 15px/17px Roboto;
     }
 }
 

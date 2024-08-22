@@ -23,12 +23,13 @@ const CartSlice = createSlice({
         },
         decreaseQuantity: (state, action) => {
             state.cartDetails = state.cartDetails.map(book => {
-                if (book._id === action.payload._id) {
+                if (book._id === action.payload._id && book.quantityToBuy > 1) {
                     return {
                         ...book,
                         quantityToBuy: book.quantityToBuy - 1
                     }
                 }
+                return book
             })
 
         },
@@ -36,7 +37,8 @@ const CartSlice = createSlice({
             state.cartDetails = state.cartDetails.map(book => {
                 if (book._id === action.payload._id) {
                     return {
-                        ...action.payload
+                        ...book,
+                        quantityToBuy : action.payload.quantityToBuy,
                     }
                 }
                 return book
@@ -44,17 +46,9 @@ const CartSlice = createSlice({
 
         },
         removeQuantity: (state, action) => {
-            state.cartDetails = state.cartDetails.map(book => {
-                if (book._id === action.payload._id) {
-                    return {
-                        ...action.payload
-                    }
-                }
-                return book
-            })
-
+            state.cartDetails = state.cartDetails.filter(book => book._id !== action.payload._id)
         },
-        emptyCart: (state, action) => {
+        emptyCart: (state) => {
             state.cartDetails = []
         }
     }

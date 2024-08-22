@@ -21,6 +21,7 @@ import FormLabel from '@mui/material/FormLabel';
 import RadioGroup from '@mui/material/RadioGroup';
 import FormControlLabel from '@mui/material/FormControlLabel';
 import { styled } from '@mui/material/styles';
+import orderImg from '../../assets/orderplaced.png'
 
 function Cart() {
     const token = localStorage.getItem('token')
@@ -41,8 +42,6 @@ function Cart() {
     const dispatch = useDispatch();
     const navigate = useNavigate();
 
-
-
     useEffect(() => {
         setCartCount(cartDetailsList.length);
         setCartDetails(cartDetailsList);
@@ -50,22 +49,21 @@ function Cart() {
 
     async function handleClick(action, book) {
         const updatedQuantity = action === 'decreaseQuantity' ? book.quantityToBuy - 1 : book.quantityToBuy + 1;
-
+        const bookToUpdate = { ...book, quantityToBuy: updatedQuantity };
         if (action !== 'removeQuantity') {
-            const bookToUpdate = { ...book, quantityToBuy: updatedQuantity };
             if (token) {
-                await updateCartApi(book.cartId, updatedQuantity);
+                await updateCartApi(book._id, updatedQuantity);
             }
             action === 'decreaseQuantity' ? dispatch(decreaseQuantity(bookToUpdate)) : dispatch(increaseQuantity(bookToUpdate));
         } else {
             if (token) {
-                await removeCartApi(book.cartId);
+                await removeCartApi(book._id);
             }
             dispatch(removeQuantity(book));
         }
     }
 
-    async function handleCilick(action) {
+    async function handleClick(action) {
         const orderAddress = {
             fullname: fullname,
             mobileNumber: mobileNumber,
@@ -96,6 +94,7 @@ function Cart() {
             }
         }
         if (action === "continueShopping") {
+            console.log("order sent");
             setCart(true)
             navigate('/')
         }
@@ -257,7 +256,7 @@ function Cart() {
                             </FormControl>
 
                             <div className="cart-address-details-customer-address-last-btn-cnt">
-                                {!orderDetails && <Button variant="contained" id="cart-place-order-btn" onClick={() => handleCilick("continue")}>Continue</Button>
+                                {!orderDetails && <Button variant="contained" id="cart-place-order-btn" onClick={() => handleClick("continue")}>Continue</Button>
                                 }
                             </div>
                         </div>
@@ -285,7 +284,7 @@ function Cart() {
                                 </div>
                             )}
                             <div className="cart-order-details-btn-cnt">
-                                <Button variant="contained" id="cart-place-order-btn" onClick={() => handleCilick("checkout")}>CHECKOUT</Button>
+                                <Button variant="contained" id="cart-place-order-btn" onClick={() => handleClick("checkout")}>CHECKOUT</Button>
                             </div>
                         </div>
                         :
@@ -297,7 +296,10 @@ function Cart() {
                 :
                 <>
                     <div className="cart-order-img-main-cnt">
-                        {/* <img src={orderPlaced} alt="" /> */}
+                        <img src={orderImg} alt="" />
+                    </div>
+                    <div className="order-placed-id-text">
+                        <p >hurray!!! your order is confirmed the order id is #123456 save the order id for further communication..</p>
                     </div>
                     <div className="cart-main-cnt order-main-cnt">
                         <div className="order-cnt-main-txt">
@@ -317,7 +319,7 @@ function Cart() {
                             </div>
                         </div>
                         <div className="order-cnt-main-continue-btn-cnt">
-                            <Button variant="contained" id="cart-place-order-btn" onClick={() => handleCilick("continueShopng")}>CONTINUE SHOPING</Button>
+                            <Button variant="contained" id="cart-place-order-btn" onClick={() => handleClick("continueShopping")}>CONTINUE SHOPING</Button>
                         </div>
                     </div>
                 </>

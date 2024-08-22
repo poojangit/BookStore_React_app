@@ -12,6 +12,20 @@ import FavoriteBorderOutlinedIcon from '@mui/icons-material/FavoriteBorderOutlin
 import Button from '@mui/material/Button';
 import { useNavigate } from 'react-router-dom';
 import AllBooks from '../allbooks/AllBooks';
+import IconButton from '@mui/material/IconButton';
+import ShoppingCartIcon from '@mui/icons-material/ShoppingCart';
+import Badge from '@mui/material/Badge';
+import { useSelector } from 'react-redux';
+
+
+const StyledBadge = styled(Badge)(({ theme }) => ({
+    '& .MuiBadge-badge': {
+      right: -3,
+      top: 13,
+      border: `2px solid ${theme.palette.background.paper}`,
+      padding: '0 4px',
+    },
+  }));
 
 const SearchIconWrapper = styled('div')(({ theme }) => ({
     padding: theme.spacing(0, 2),
@@ -39,12 +53,12 @@ const Search = styled('div')(({ theme }) => ({
         width: 'auto',
     },
     [theme.breakpoints.down('sm')]: {
-        width: '100%', 
-        marginRight: 0, 
-        marginLeft: 0, 
+        width: '100%',
+        marginRight: 0,
+        marginLeft: 0,
     },
     [theme.breakpoints.down('xs')]: {
-        width: '100%', 
+        width: '100%',
     },
 }));
 
@@ -64,6 +78,10 @@ const StyledInputBase = styled(InputBase)(({ theme }) => ({
 function NavBar() {
     const navigate = useNavigate()
     const [anchorEl, setAnchorEl] = React.useState(null);
+    const cartItems = useSelector((store) => store.allCartDetails?. cartDetails)
+    console.log(cartItems);
+    const totalQuantity = cartItems.reduce((acc, item) => acc + item.quantity, 0)
+    console.log(totalQuantity);
     const open = Boolean(anchorEl);
     const token = localStorage.getItem('token')
     // console.log(token);
@@ -76,7 +94,7 @@ function NavBar() {
     const handleLogout = () => {
         localStorage.clear()
         window.location.reload()
-      }
+    }
 
     return (
         <>
@@ -119,26 +137,26 @@ function NavBar() {
 
                                 <div className='profile-after-login-icon-cnt'>
                                     <PersonOutlineOutlinedIcon style={{
-                                        color : '#878787'
-                                    }}/>
+                                        color: '#878787',
+                                    }} />
                                     <p onClick={() => navigate('/profile')}>Profile</p>
                                 </div>
                                 <div className='profile-after-login-icon-cnt'>
                                     <MarkunreadMailboxOutlinedIcon style={{
-                                        color : '#878787'
-                                    }}/>
+                                        color: '#878787'
+                                    }} />
                                     <p>My Orders</p>
                                 </div>
                                 <div className='profile-after-login-icon-cnt'>
                                     <FavoriteBorderOutlinedIcon style={{
-                                        color : '#878787'
-                                    }}/>
+                                        color: '#878787'
+                                    }} />
                                     <p>My Wishlist</p>
                                 </div>
 
                                 <Button variant="outlined" style={{
-                                    borderColor: '#A03037' , 
-                                    color: '#A03037' 
+                                    borderColor: '#A03037',
+                                    color: '#A03037'
                                 }} className='after-login-logout-btn' onClick={handleLogout}>Logout</Button>
                             </div>
                         ) : (
@@ -146,22 +164,22 @@ function NavBar() {
                                 <p className='profile-before-login-welcome-txt'>Welcome</p>
                                 <p className='profile-before-login-txt'>To access account and manage orders</p>
                                 <Button variant="outlined" style={{
-                                    borderColor: '#A03037' , 
-                                    color: '#A03037' 
+                                    borderColor: '#A03037',
+                                    color: '#A03037'
                                 }} className='before-login-logout-btn' onClick={handleLogout}>Login/signup</Button>
-                                <hr/>
+                                <hr />
                                 <div className='profile-before-login-icon-cnt'>
                                     <MarkunreadMailboxOutlinedIcon style={{
-                                        color : '#878787',
-                                         width : '18'
-                                    }}/>
+                                        color: '#878787',
+                                        width: '18'
+                                    }} />
                                     <p className='profile-before-login-txt'>My Orders</p>
                                 </div>
                                 <div className='profile-before-login-icon-cnt'>
                                     <FavoriteBorderOutlinedIcon style={{
-                                        color : '#878787',
-                                        width : '18'
-                                    }}/>
+                                        color: '#878787',
+                                        width: '18'
+                                    }} />
                                     <p className='profile-before-login-txt' >My Wishlist</p>
                                 </div>
                             </div>
@@ -171,13 +189,18 @@ function NavBar() {
 
                     <div className='navbar-cart-main-cnt' onClick={() => navigate(`/cart`)}>
 
-                        <ShoppingCartOutlinedIcon className='cart-icon' />
+                        <IconButton aria-label="cart" sx={{padding : "0px"}}>
+                            <StyledBadge badgeContent={totalQuantity} color="secondary">
+                                <ShoppingCartIcon className='cart-icon' />
+                            </StyledBadge>
+                        </IconButton>
+                        {/* <ShoppingCartOutlinedIcon className='cart-icon' /> */}
                         <p>Cart</p>
 
                     </div>
                 </div>
             </div>
-            
+
         </>
     );
 }
