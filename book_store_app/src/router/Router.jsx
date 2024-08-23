@@ -10,6 +10,7 @@ import AllBooks from '../components/allbooks/AllBooks';
 import ViewBook from '../components/viewbook/ViewBook';
 import Cart from '../components/cart/Cart';
 import Wishlist from '../components/wishlist/WishList';
+import MyOrders from '../components/myorders/MyOrders';
 
 function Router() {
   return (
@@ -24,6 +25,7 @@ function Router() {
             <Route path = 'bookdetails/:bookid' element = {<ViewBook/>}/>
             <Route path='cart' element = {<Cart/>}/>
             <Route path='wishlist' element ={<Wishlist/>}/>
+            <Route path='myorders' element = {<MyOrders/>}/>
           </Route>
         </Routes>
       </BrowserRouter>

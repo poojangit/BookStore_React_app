@@ -40,7 +40,7 @@ function WishList() {
             <div className="wishlist-main-cnt">
                 <div className="wishlist-name-sort-opt-main-cnt">
                     <div className="wishlist-total-count-main-cnt">
-                        <p id="wishlist-book-text" onClick={()=>navigate(`/dashboard`)}>Home/</p>
+                        <p id="wishlist-book-text" onClick={()=>navigate(`/`)}>Home/</p>
                         <p id="wishlist-total-count">My Wishlist</p>
                     </div>
                 </div>

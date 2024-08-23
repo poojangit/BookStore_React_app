@@ -101,10 +101,13 @@ export const getFeedbackApi = async (id) => {
 };
 
 export const postFeedbackApi = async (id, data) => {
+    console.log(id);
     const res = await axios.post(
         `https://bookstore.incubation.bridgelabz.com/bookstore_user/add/feedback/${id}`,
         data,
         headerConfig()
     );
+    console.log(res);
     return res;
+
 };

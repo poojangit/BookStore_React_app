@@ -22,6 +22,7 @@ import RadioGroup from '@mui/material/RadioGroup';
 import FormControlLabel from '@mui/material/FormControlLabel';
 import { styled } from '@mui/material/styles';
 import orderImg from '../../assets/orderplaced.png'
+import {  getMyOrderList } from '../../store/MyOrderListSlice'
 
 function Cart() {
     const token = localStorage.getItem('token')
@@ -84,13 +85,16 @@ function Cart() {
                 product_id: book._id,
                 product_name: book.bookName,
                 product_quantity: book.quantityToBuy,
-                product_price: book.discountPrice
+                product_price: book.discountPrice,
+                order_date : new Date()
             }))
             console.log({ orders: orderList }, orderAddress);
             const res = await placeOrderApi({ orders: orderList })
             if (res.data.message === "Order successfully placed!!!") {
                 setCart(false)
                 dispatch(emptyCart())
+                dispatch(getMyOrderList(orderList))
+                // navigate('/myorders')
             }
         }
         if (action === "continueShopping") {
@@ -104,9 +108,9 @@ function Cart() {
 
     const handlePlaceOrder = () => {
         if (!token) {
-            openLoginModal();
+            openLoginModal()
         } else {
-            setCustomerDetails(true);
+            setCustomerDetails(true)
         }
     };
     const BpIcon = styled('span')(({ theme }) => ({

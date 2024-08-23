@@ -145,13 +145,13 @@ function NavBar() {
                                     <MarkunreadMailboxOutlinedIcon style={{
                                         color: '#878787'
                                     }} />
-                                    <p>My Orders</p>
+                                    <p onClick={() => navigate('/myorders')}>My Orders</p>
                                 </div>
                                 <div className='profile-after-login-icon-cnt'>
                                     <FavoriteBorderOutlinedIcon style={{
                                         color: '#878787'
                                     }} />
-                                    <p>My Wishlist</p>
+                                    <p onClick={() => navigate('/wishlist')}>My Wishlist</p>
                                 </div>
 
                                 <Button variant="outlined" style={{
