@@ -27,6 +27,9 @@
     p {
         color: white;
     }
+    :hover {
+        cursor: pointer;
+    }
 }
 .navbar-profile-cart-main-cnt {
     display: flex;
@@ -110,23 +113,23 @@
 
 @media only screen and (min-width: 300px) and (max-width: 600px) {
     .navbar-main-cnt {
-        padding: 15px 20px;
-        height: 0%;
-        flex-direction: column;
+        // padding: 15px 20px;
+        // height: 0%;
+        // flex-direction: column;
         justify-content: center;
         align-items: center;
-        gap: 10px;
+        gap: 35px;
     }
 
     .navbar-logo-search-main-cnt {
-        flex-direction: column;
+        // flex-direction: column;
         align-items: center;
-        gap: 10px;
+        // gap: 10px;
     }
 
     .navbar-logo-main-cnt {
         gap: 10px;
-        justify-content: center;
+        // justify-content: center;
     }
 
     .navbar-profile-cart-main-cnt {
@@ -140,14 +143,19 @@
         flex-direction: row;
         gap: 5px;
         align-items: center;
+
+        .profile-icon {
+            width: 25px;
+        }
     }
 
     .profile-after-login-cnt,
     .profile-before-login-cnt {
         padding: 10px 20px;
-        align-items: center;
+        // align-items: center;
         gap: 10px;
         width: 100%;
+
     }
 
     .profile-after-login-icon-cnt,
@@ -161,3 +169,4 @@
         text-align: center;
     }
 }
+

@@ -39,12 +39,12 @@ export const addToCartApi = async (id) => {
     return res;
 };
 
-export const updateCartApi = async (id, quantity) => {
+export const updateCartApi = async (id,  quantityChange) => {
     console.log(id);
-    console.log(quantity);
+    console.log( quantityChange);
     const res = await axios.put(
         `https://bookstore.incubation.bridgelabz.com/bookstore_user/cart_item_quantity/${id}`,
-        { quantityToBuy: quantity },
+        { quantityToBuy:  quantityChange },
         headerConfig()
     );
     return res;
@@ -102,6 +102,7 @@ export const getFeedbackApi = async (id) => {
 
 export const postFeedbackApi = async (id, data) => {
     console.log(id);
+    console.log("Sending data:", data);
     const res = await axios.post(
         `https://bookstore.incubation.bridgelabz.com/bookstore_user/add/feedback/${id}`,
         data,
@@ -109,5 +110,5 @@ export const postFeedbackApi = async (id, data) => {
     );
     console.log(res);
     return res;
-
 };
+// console.log(postFeedbackApi);

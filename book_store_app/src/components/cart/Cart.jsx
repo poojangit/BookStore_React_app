@@ -37,7 +37,7 @@ function Cart() {
     const [cart, setCart] = useState(true)
     const [fullname, setFullname] = useState('')
     const [mobileNumber, setMobileNumber] = useState('')
-    const [address, setAdderss] = useState('')
+    const [address, setAddress] = useState('')
     const [city, setCity] = useState('')
     const [state, setState] = useState('')
     const dispatch = useDispatch();
@@ -48,22 +48,21 @@ function Cart() {
         setCartDetails(cartDetailsList);
     }, [cartDetailsList]);
 
-    async function handleClick(action, book) {
-        const updatedQuantity = action === 'decreaseQuantity' ? book.quantityToBuy - 1 : book.quantityToBuy + 1;
-        const bookToUpdate = { ...book, quantityToBuy: updatedQuantity };
-        if (action !== 'removeQuantity') {
-            if (token) {
-                await updateCartApi(book._id, updatedQuantity);
-            }
-            action === 'decreaseQuantity' ? dispatch(decreaseQuantity(bookToUpdate)) : dispatch(increaseQuantity(bookToUpdate));
-        } else {
-            if (token) {
-                await removeCartApi(book._id);
-            }
-            dispatch(removeQuantity(book));
+   async function handleCartAction(action, book) {
+    const updatedQuantity = action === 'decreaseQuantity' ? book.quantityToBuy - 1 : book.quantityToBuy + 1;
+    const bookToUpdate = { ...book, quantityToBuy: updatedQuantity };
+    if (action !== 'removeQuantity') {
+        if (token) {
+            await updateCartApi(book._id, updatedQuantity);
         }
+        action === 'decreaseQuantity' ? dispatch(decreaseQuantity(bookToUpdate)) : dispatch(increaseQuantity(bookToUpdate));
+    } else {
+        if (token) {
+            await removeCartApi(book._id);
+        }
+        dispatch(removeQuantity(book));
     }
-
+}
     async function handleClick(action) {
         const orderAddress = {
             fullname: fullname,
@@ -227,7 +226,7 @@ function Cart() {
                                 </div>
                                 <div className="cart-address-details-customer-address-inner-cnt">
                                     <p>Address</p>
-                                    <TextField id="outlined-multiline-flexible " multiline maxRows={4} onChange={(e) => setAdderss(e.target.value)} />
+                                    <TextField id="outlined-multiline-flexible " multiline maxRows={4} onChange={(e) => setAddress(e.target.value)} />
                                 </div>
                                 <div className="cart-address-details-customer-name-num-inp-cnt address-city-state-cnt">
                                     <div className="cart-address-details-customer-name-inp-cnt">

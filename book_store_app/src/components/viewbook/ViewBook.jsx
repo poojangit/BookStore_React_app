@@ -68,13 +68,16 @@ function ViewBook() {
             dispatch(addBookToCart(bookToAdd));
         }
         if (action === 'decreaseQuantity') {
-            if (bookQuantity > 1) {
-                const bookToAdd = { ...bookDetail, quantityToBuy: -1 };
-                setBookQuantity(bookQuantity - 1);
-                if (token) {
-                    await handleCartUpdate(bookToAdd, -1);
+            if (action === 'decreaseQuantity') {
+                if (bookQuantity > 1) {
+                    const bookToAdd = { ...bookDetail, quantityToBuy: -1 };
+                    console.log("Decreasing quantity. Current quantity:", bookQuantity);
+                    setBookQuantity(bookQuantity - 1);
+                    if (token) {
+                        await handleCartUpdate(bookToAdd, -1);
+                    }
+                    dispatch(decreaseQuantity(bookToAdd));
                 }
-                dispatch(decreaseQuantity(bookToAdd));
             }
         }
         if (action === 'increaseQuantity') {
@@ -183,7 +186,7 @@ function ViewBook() {
                         <p className='book-view-book-name'>{bookDetail?.bookName}</p>
                         <p className='book-view-author-name'>{bookDetail?.author}</p>
                         <div className='book-view-rating-review-cnt'>
-                            <p className='book-view-rating-cnt'>4.5 <StarOutlinedIcon sx={{ color: 'white', width: 17 }} id='book-details-bookrating-star' /></p>
+                            <p className='book-view-rating-cnt'>4.5<StarOutlinedIcon sx={{ color: 'white', width: 17 }} id='book-details-bookrating-star' /></p>
                             <p className='book-view-review-cnt'>({bookDetail?.quantity})</p>
                         </div>
                         <div className='book-view-discnt-ori-price-cnt'>
@@ -204,7 +207,7 @@ function ViewBook() {
                             <div className="book-view-opt-rating-main-cnt">
                                 <Typography component="legend">Overall rating</Typography>
                                 <Stack spacing={1} className="book-view-stack-cnt">
-                                    <Rating name="half-rating" value={rating} precision={0.5} onChange={(event, newValue) => setRating(newValue)} />
+                                    <Rating name="half-rating" value={rating} precision={1} onChange={(event, newValue) => setRating(newValue)} />
                                 </Stack>
                                 <TextField
                                     className="book-view-comment-inpt"

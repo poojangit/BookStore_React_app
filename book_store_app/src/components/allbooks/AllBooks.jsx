@@ -13,32 +13,51 @@ import { Store } from '@mui/icons-material';
 // import BookStore from '../../bookstore/BookStore';
 
 function AllBooks() {
-    const [bookList, setBookList] = useState([])
-    const BookListDetails = useSelector((store) => store.allBookStore.AllBooks || [])
-    const [bookCount, setBookCount] = useState(bookList.length)
+    const [bookList, setBookList] = useState([]);
+    const [filteredBooks, setFilteredBooks] = useState([]);
+    const [bookCount, setBookCount] = useState(0);
     const [currentPage, setCurrentPage] = useState(1);
     const [sortValue, setSortValue] = useState('');
     const itemsPerPage = 8;
 
+    const BookListDetails = useSelector((store) => store.allBookStore.AllBooks || []);
+    console.log(BookListDetails);
+    const searchValue = useSelector((store) => store.bookSearchDetails?.searchBookValue.toLowerCase());
 
+    
     useEffect(() => {
         if (BookListDetails.length) {
-            setBookCount(BookListDetails.length);
-            setBookList(BookListDetails);
+            let filtered = [...BookListDetails]
+
+            if (searchValue) {
+                filtered = filtered.filter(book =>
+                    book.bookName.toLowerCase().includes(searchValue) ||
+                    book.author.toLowerCase().includes(searchValue)
+                );
+            }
+
+            if (sortValue === 'low to high') {
+                filtered.sort((a, b) => a.discountPrice - b.discountPrice);
+            } else if (sortValue === 'high to low') {
+                filtered.sort((a, b) => b.discountPrice - a.discountPrice);
+            }
+                setFilteredBooks(filtered);
+            setBookCount(filtered.length);
         }
-    }, [BookListDetails]);
+    }, [BookListDetails, searchValue, sortValue]);
 
 
     const handlePageChange = (event, value) => {
         setCurrentPage(value);
     };
+
     const handleSortChange = (event) => {
-        setSortValue(event.target.value); // Update the state with selected value
+        setSortValue(event.target.value);
     };
+
     const startIndex = (currentPage - 1) * itemsPerPage;
     const endIndex = startIndex + itemsPerPage;
-    const paginatedBooks = bookList.slice(startIndex, endIndex);
-
+    const paginatedBooks = filteredBooks.slice(startIndex, endIndex);
 
     return (
         <>
@@ -53,8 +72,8 @@ function AllBooks() {
                         <Select
                             labelId="demo-select-small-label"
                             id="demo-select-small"
-                            value={sortValue} // Use the state variable
-                            onChange={handleSortChange} // Update the state on change
+                            value={sortValue} 
+                            onChange={handleSortChange} 
                             label="Sort by relevance"
                         >
                             <MenuItem value="">
@@ -62,7 +81,6 @@ function AllBooks() {
                             </MenuItem>
                             <MenuItem value={'low to high'}>Price: Low to High</MenuItem>
                             <MenuItem value={'high to low'}>Price: High to Low</MenuItem>
-                            <MenuItem value={'new arrival'}>Newest Arrivals</MenuItem>
                         </Select>
                     </FormControl>
                 </div>
@@ -70,10 +88,9 @@ function AllBooks() {
                     {paginatedBooks?.map((book, key) => (
                         <Books bookDetails={book} key={key} />
                     ))}
-                    <Books />
                 </div>
                 <Stack spacing={5}>
-                    <Pagination count={10} shape="rounded" onChange={handlePageChange} style={{ justifyContent: "center", margin: "30px 0px 40px 0px" }} />
+                    <Pagination count={3} shape="rounded" onChange={handlePageChange} style={{ justifyContent: "center", margin: "30px 0px 40px 0px" }} />
                 </Stack>
             </div>
         </>
