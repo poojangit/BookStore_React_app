@@ -4,42 +4,46 @@ import AddIcon from '@mui/icons-material/Add';
 import RemoveIcon from '@mui/icons-material/Remove';
 import { decreaseQuantity, emptyCart, increaseQuantity, removeQuantity } from "../../store/CartSlice";
 import Button from '@mui/material/Button';
-import "./Cart.scss"
-import bookImage from '../../assets/book_image1.png'
+import "./Cart.scss";
+import bookImage from '../../assets/book_image1.png';
 import InputLabel from '@mui/material/InputLabel';
 import MenuItem from '@mui/material/MenuItem';
 import FormControl from '@mui/material/FormControl';
 import Select from '@mui/material/Select';
 import PlaceIcon from '@mui/icons-material/Place';
-import Login from "../../pages/Login/Login"
 import { useNavigate } from "react-router-dom";
 import TextField from '@mui/material/TextField';
 import { placeOrderApi, removeCartApi, updateCartApi } from "../../services/BookServices";
-import { toast } from 'react-toastify';
 import Radio from '@mui/material/Radio';
 import FormLabel from '@mui/material/FormLabel';
 import RadioGroup from '@mui/material/RadioGroup';
 import FormControlLabel from '@mui/material/FormControlLabel';
 import { styled } from '@mui/material/styles';
-import orderImg from '../../assets/orderplaced.png'
-import {  getMyOrderList } from '../../store/MyOrderListSlice'
+import orderImg from '../../assets/orderplaced.png';
+import { getMyOrderList } from '../../store/MyOrderListSlice';
 
 function Cart() {
-    const token = localStorage.getItem('token')
+    const token = localStorage.getItem('token');
     const cartDetailsList = useSelector(store => store.allCartDetails?.cartDetails);
-    console.log(cartDetailsList);
     const [location, setLocation] = useState('');
     const [cartDetails, setCartDetails] = useState(cartDetailsList);
     const [cartCount, setCartCount] = useState(cartDetailsList.length);
     const [LoginModalOpen, setLoginModalOpen] = useState(false);
     const [customerDetails, setCustomerDetails] = useState(false);
     const [orderDetails, setOrderDetails] = useState(false);
-    const [cart, setCart] = useState(true)
-    const [fullname, setFullname] = useState('')
-    const [mobileNumber, setMobileNumber] = useState('')
-    const [address, setAddress] = useState('')
-    const [city, setCity] = useState('')
-    const [state, setState] = useState('')
+    const [cart, setCart] = useState(true);
+    const [fullname, setFullname] = useState('');
+    const [mobileNumber, setMobileNumber] = useState('');
+    const [address, setAddress] = useState('');
+    const [city, setCity] = useState('');
+    const [state, setState] = useState('');
+    const [errorObj, setErrorObj] = useState({
+        fullnameError: '',
+        mobileNumberError: '',
+        addressError: '',
+        cityError: '',
+        stateError: ''
+    });
     const dispatch = useDispatch();
     const navigate = useNavigate();
 
@@ -48,35 +52,64 @@ function Cart() {
         setCartDetails(cartDetailsList);
     }, [cartDetailsList]);
 
-   async function handleCartAction(action, book) {
-    const updatedQuantity = action === 'decreaseQuantity' ? book.quantityToBuy - 1 : book.quantityToBuy + 1;
-    const bookToUpdate = { ...book, quantityToBuy: updatedQuantity };
-    if (action !== 'removeQuantity') {
-        if (token) {
-            await updateCartApi(book._id, updatedQuantity);
+    const validateFields = () => {
+        let isValid = true;
+        const newErrorObj = {
+            fullnameError: '',
+            mobileNumberError: '',
+            addressError: '',
+            cityError: '',
+            stateError: ''
+        };
+
+        if (!fullname.match(/^[a-zA-Z\s]+$/)) {
+            newErrorObj.fullnameError = 'Please enter a valid full name';
+            isValid = false;
         }
-        action === 'decreaseQuantity' ? dispatch(decreaseQuantity(bookToUpdate)) : dispatch(increaseQuantity(bookToUpdate));
-    } else {
-        if (token) {
-            await removeCartApi(book._id);
+
+        if (!mobileNumber.match(/^[6-9]\d{9}$/)) {
+            newErrorObj.mobileNumberError = 'Please enter a valid 10-digit mobile number';
+            isValid = false;
         }
-        dispatch(removeQuantity(book));
-    }
-}
-    async function handleClick(action) {
-        const orderAddress = {
-            fullname: fullname,
-            mobileNumber: mobileNumber,
-            address: address,
-            city: city,
-            state: state
+
+        if (!address.match(/^[a-zA-Z0-9\s,.'-]{3,}$/)) {
+            newErrorObj.addressError = 'Please enter a valid address';
+            isValid = false;
         }
-        if (action === 'continue') {
-            if (!orderAddress.fullname || !orderAddress.mobileNumber || !orderAddress.address || !orderAddress.city || !orderAddress.state) {
-                toast.error("Please provide all required adress details")
-            } else {
-                setOrderDetails(true)
+
+        if (!city.match(/^[a-zA-Z\s]+$/)) {
+            newErrorObj.cityError = 'Please enter a valid city';
+            isValid = false;
+        }
+
+        if (!state.match(/^[a-zA-Z\s]+$/)) {
+            newErrorObj.stateError = 'Please enter a valid state';
+            isValid = false;
+        }
+
+        setErrorObj(newErrorObj);
+        return isValid;
+    };
+
+    async function handleCartAction(action, book) {
+        const updatedQuantity = action === 'decreaseQuantity' ? book.quantityToBuy - 1 : book.quantityToBuy + 1;
+        const bookToUpdate = { ...book, quantityToBuy: updatedQuantity };
+        if (action !== 'removeQuantity') {
+            if (token) {
+                await updateCartApi(book._id, updatedQuantity);
             }
+            action === 'decreaseQuantity' ? dispatch(decreaseQuantity(bookToUpdate)) : dispatch(increaseQuantity(bookToUpdate));
+        } else {
+            if (token) {
+                await removeCartApi(book._id);
+            }
+            dispatch(removeQuantity(book));
+        }
+    }
+    async function handleClick(action) {
+        if (action === 'continue') {
+            if (!validateFields()) return;
+            setOrderDetails(true);
         }
 
         if (action === 'checkout') {
@@ -85,24 +118,23 @@ function Cart() {
                 product_name: book.bookName,
                 product_quantity: book.quantityToBuy,
                 product_price: book.discountPrice,
-                order_date : new Date()
-            }))
-            console.log({ orders: orderList }, orderAddress);
-            const res = await placeOrderApi({ orders: orderList })
+                order_date: new Date()
+            }));
+
+            const res = await placeOrderApi({ orders: orderList });
             if (res.data.message === "Order successfully placed!!!") {
-                setCart(false)
-                dispatch(emptyCart())
-                dispatch(getMyOrderList(orderList))
+                setCart(false);
+                dispatch(emptyCart());
+                dispatch(getMyOrderList(orderList));
                 // navigate('/myorders')
             }
         }
+
         if (action === "continueShopping") {
-            console.log("order sent");
-            setCart(true)
-            navigate('/')
+            setCart(true);
+            navigate('/');
         }
     }
-
     const openLoginModal = () => setLoginModalOpen(true);
 
     const handlePlaceOrder = () => {
@@ -212,30 +244,72 @@ function Cart() {
                             <div className="cart-address-details-customer-name-num-inp-cnt">
                                 <div className="cart-address-details-customer-name-inp-cnt">
                                     <p>Full Name</p>
-                                    <input type="text" value={fullname || ''} onChange={(e) => setFullname(e.target.value)} />
+                                    <TextField
+                                        // label="Full Name"
+                                        variant="outlined"
+                                        fullWidth
+                                        value={fullname}
+                                        onChange={(e) => setFullname(e.target.value)}
+                                        error={!!errorObj.fullnameError}
+                                        helperText={errorObj.fullnameError}
+                                    />
                                 </div>
                                 <div className="cart-address-details-customer-name-inp-cnt">
                                     <p>Mobile Number</p>
-                                    <input type="text" value={mobileNumber || ''} onChange={(e) => setMobileNumber(e.target.value)} />
+                                    <TextField
+                                        // label="Mobile Number"
+                                        variant="outlined"
+                                        fullWidth
+                                        value={mobileNumber}
+                                        onChange={(e) => setMobileNumber(e.target.value)}
+                                        error={!!errorObj.mobileNumberError}
+                                        helperText={errorObj.mobileNumberError}
+                                    />
                                 </div>
                             </div>
                             <div className="cart-address-details-customer-address-main-cnt">
                                 <div className="cart-address-details-customer-address-txt1-cnt">
                                     <p id="cart-address-details-customer-address-txt1 ">1.Work</p>
-                                    <p id="cart-address-details-customer-address-txt2">Edit</p>
+                                    {/* <p id="cart-address-details-customer-address-txt2">Edit</p> */}
                                 </div>
                                 <div className="cart-address-details-customer-address-inner-cnt">
                                     <p>Address</p>
-                                    <TextField id="outlined-multiline-flexible " multiline maxRows={4} onChange={(e) => setAddress(e.target.value)} />
+                                    <TextField
+                                        // label="Address"
+                                        variant="outlined"
+                                        fullWidth
+                                        multiline
+                                        maxRows={4}
+                                        value={address}
+                                        onChange={(e) => setAddress(e.target.value)}
+                                        error={!!errorObj.addressError}
+                                        helperText={errorObj.addressError}
+                                    />
                                 </div>
                                 <div className="cart-address-details-customer-name-num-inp-cnt address-city-state-cnt">
                                     <div className="cart-address-details-customer-name-inp-cnt">
                                         <p>City/town</p>
-                                        <input type="text" id="cart-address-details-customer-state-inp" onChange={(e) => setCity(e.target.value)} />
+                                        <TextField
+                                            // label="City/Town"
+                                            variant="outlined"
+                                            fullWidth
+                                            value={city}
+                                            onChange={(e) => setCity(e.target.value)}
+                                            error={!!errorObj.cityError}
+                                            helperText={errorObj.cityError}
+                                        />
                                     </div>
                                     <div className="cart-address-details-customer-name-inp-cnt">
                                         <p>State</p>
-                                        <input type="text" id="cart-address-details-customer-state-inp" onChange={(e) => setState(e.target.value)} />
+                                        <TextField
+                                            // label="State"
+                                            variant="outlined"
+                                            fullWidth
+                                            value={state}
+                                            onChange={(e) => setState(e.target.value)}
+                                            error={!!errorObj.stateError}
+                                            helperText={errorObj.stateError}
+                                        />
                                     </div>
                                 </div>
                             </div>

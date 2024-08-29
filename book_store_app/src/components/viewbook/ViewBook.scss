@@ -40,7 +40,7 @@
     // gap: 5px;
 }
 .view-book-1st-small-img,
-.view-book-2nd-small-img {
+.view-book-2nd.-small-img {
     width: 60px;
     height: 80px;
     border: 2px solid #d1d1d1;
@@ -76,7 +76,19 @@
     gap: 10px;
     margin-top: 20px;
 }
-
+.bookView-quantityControl-ctn{
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 21%;
+    background-color: lightgrey;
+    width: 50%;
+    border-radius: 4px;
+    #bookView-decrease-btn, 
+    #bookView-increase-btn{
+        width: 30%;
+    }
+}
 .book-view-details-main-cnt {
     display: flex;
     flex-direction: column;
@@ -215,4 +227,116 @@
     color: #707070;
     font-size: medium;
     padding-left: 45px;
+}
+
+@media only screen and (min-width: 300px) and (max-width: 600px) {
+    .view-book-main-cnt {
+        padding: 0px 20px;
+    }
+
+    .view-book-home-or-book-qnty-cnt {
+        display: flex;
+        align-items: flex-start;
+        gap: 10px;
+        padding: 20px 0px;
+    }
+
+    .view-book-inner-main-cnt {
+        flex-direction: column;
+        align-items: center;
+        gap: 20px;
+    }
+
+    .view-book-img-main-cnt {
+        flex-direction: column;
+        align-items: center;
+        gap: 10px;
+    }
+
+    .view-book-small-img-cnt {
+        display: none;
+    }
+    .view-book-img-add-wish-cnt {
+        display: flex;
+        flex-direction: column;
+    }
+    .view-book-large-img-cnt {
+        width: 300px;
+        height: 400px;
+    }
+    
+    .view-image-add-wish-opt-cnt{
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+    }
+
+    .book-view-details-main-cnt {
+        width: 100%;
+        padding: 0;
+    }
+
+    .book-view-book-name {
+        font-size: 28px;
+    }
+
+    .book-view-author-name {
+        font-size: 16px;
+    }
+
+    .book-view-rating-review-cnt {
+        display: flex;
+        align-items: center;
+    }
+
+    .book-view-discnt-price {
+        font-size: 28px;
+    }
+
+    .book-view-actual-price {
+        font-size: 18px;
+    }
+
+    .book-view-descrp-cnt {
+        padding-top: 20px;
+        gap: 15px;
+        padding-bottom: 30px;
+    }
+
+    .book-view-cust-feebk-main-cnt {
+        margin-top: 15px;
+    }
+
+    .book-view-cust-review-cnt {
+        margin: 15px 0px;
+    }
+
+    .book-view-cust-review-rating {
+        padding-left: 20px;
+    }
+
+    .book-view-cust-name-rating-cnt {
+        gap: 3px;
+    }
+
+    .book-view-cust-avtar-name-cnt {
+        gap: 5px;
+    }
+
+    .book-view-opt-rating-main-cnt {
+        padding: 15px;
+        gap: 4px;
+    }
+
+    .book-view-submit-btn {
+        padding-top: 10px;
+    }
+
+    .book-view-cust-review-para {
+        padding-left: 20px;
+        font-size: small;
+    }
+    .bookView-quantityControl-ctn{
+        width: 66%;
+    }
 }

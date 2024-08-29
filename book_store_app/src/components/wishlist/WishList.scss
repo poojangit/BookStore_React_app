@@ -27,7 +27,7 @@
 
         #wishlist-book-text {
             text-align: left;
-            font: normal normal normal 12px/16px Roboto;
+            font: normal normal normal 20px/16px Roboto;
             letter-spacing: 0px;
             color: #9D9D9D;
             opacity: 1;
@@ -149,4 +149,24 @@
     height: 23px;
     opacity: 1;
     color: #9D9D9D;
+}
+@media only screen and (min-width : 300px) and (max-width : 600px) {
+    .wishlist-main-cnt {
+        display: flex;
+        flex-direction: column;
+        // justify-content: center;
+        align-items: center;
+        padding: 0px;
+        width: auto;
+    }
+    .wishlist-name-sort-opt-main-cnt {
+        width: 63%;
+        padding: 0px;
+    }
+    .wishlist-container-inner-cnt{
+        .wishlist-header-main-cnt {
+            padding-left: 20px;
+            padding-right: 0px;
+        }
+    } 
 }

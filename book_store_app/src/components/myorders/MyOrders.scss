@@ -130,3 +130,23 @@
     opacity: 1;
     color: #9D9D9D;
 }
+
+@media only screen and (min-width : 300px) and (max-width : 600px) {
+    .myorders-main-cnt {
+        display: flex;
+        flex-direction: column;
+        // justify-content: center;
+        align-items: center;
+        padding: 0px;
+    }
+    .myorders-container-inner-cnt {
+        width: 90%;
+        padding: 0px;
+    }
+    .myorders-container-inner-cnt{
+        .myorders-header-main-cnt {
+            padding-left: 24px;
+            padding-right: 0px;
+        }
+    } 
+}

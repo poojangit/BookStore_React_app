@@ -164,7 +164,7 @@ function Login() {
         top: '50%',
         left: '50%',
         transform: 'translate(-50%, -50%)',
-        width: { xs: '90%', sm: 600 },
+        width: { sm: 600 },
         height: { xs: 'auto', sm: 310 },
         // bgcolor: 'background.paper',
         bgcolor: '#F5F5F5',
