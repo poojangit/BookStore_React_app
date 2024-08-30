@@ -664,7 +664,7 @@
     }
 
     .cart-order-details-main-cnt {
-        padding: 0px;
+        padding-right: 0px;
     }
 
     .cart-address-details-customer-address-main-cnt {
@@ -691,26 +691,32 @@
         height: auto;
         flex-direction: column;
         padding: 10px;
+
+        #order-cnt-email-txt, 
+        #order-cnt-contact-txt, 
+        #order-cnt-address-txt {
+            margin-right: 0;
+        }
     }
 
-    #order-cnt-email-txt, 
-    #order-cnt-contact-txt, 
-    #order-cnt-address-txt {
-        margin-right: 0;
+    .cart-main-cnt-contact-main-cnt{
+        display: flex;
     }
+  
 
     .order-cnt-main-txt-info-cnt {
         flex-direction: column;
+        .order-cnt-main-txt-email-cnt,
+        .order-cnt-main-txt-num-cnt,
+        .order-cnt-main-txt-address-cnt {
+            width: 100%;
+            height: auto;
+            margin-bottom: 10px;
+        }
+    
     }
 
-    .order-cnt-main-txt-email-cnt,
-    .order-cnt-main-txt-num-cnt,
-    .order-cnt-main-txt-address-cnt {
-        width: 100%;
-        height: auto;
-        margin-bottom: 10px;
-    }
-
+   
     .order-placed-id-text {
         padding: 20px;
         font-size: medium;

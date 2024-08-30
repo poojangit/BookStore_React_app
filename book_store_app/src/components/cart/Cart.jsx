@@ -25,6 +25,7 @@ import { getMyOrderList } from '../../store/MyOrderListSlice';
 function Cart() {
     const token = localStorage.getItem('token');
     const cartDetailsList = useSelector(store => store.allCartDetails?.cartDetails);
+    console.log(cartDetailsList);
     const [location, setLocation] = useState('');
     const [cartDetails, setCartDetails] = useState(cartDetailsList);
     const [cartCount, setCartCount] = useState(cartDetailsList.length);
@@ -95,13 +96,16 @@ function Cart() {
         const updatedQuantity = action === 'decreaseQuantity' ? book.quantityToBuy - 1 : book.quantityToBuy + 1;
         const bookToUpdate = { ...book, quantityToBuy: updatedQuantity };
         if (action !== 'removeQuantity') {
-            if (token) {
+            if(token) {
+                console.log("Updating cart item quantity:", updatedQuantity);
                 await updateCartApi(book._id, updatedQuantity);
             }
             action === 'decreaseQuantity' ? dispatch(decreaseQuantity(bookToUpdate)) : dispatch(increaseQuantity(bookToUpdate));
         } else {
             if (token) {
-                await removeCartApi(book._id);
+                console.log("Removing item with ID:", book._id);
+               const res = await removeCartApi(book._id);
+               console.log(res);
             }
             dispatch(removeQuantity(book));
         }
@@ -222,11 +226,11 @@ function Cart() {
                                 </div>
                                 <div className="cart-items-main-quantity-cnt">
                                     <div className="cart-quantityControl-ctn">
-                                        <button id="cart-decrease-btn" onClick={() => handleClick('decreaseQuantity', book)}><RemoveIcon /></button>
+                                        <button id="cart-decrease-btn" onClick={() => handleCartAction('decreaseQuantity', book)}><RemoveIcon /></button>
                                         <span id="cart-quantity-btn">{book.quantityToBuy}</span>
-                                        <button id="cart-increase-btn" onClick={() => handleClick('increaseQuantity', book)}><AddIcon /></button>
+                                        <button id="cart-increase-btn" onClick={() =>handleCartAction('increaseQuantity', book)}><AddIcon /></button>
                                     </div>
-                                    <Button variant="contained" onClick={() => handleClick('removeQuantity', book)} id="cart-remove-btn">Remove</Button>
+                                    <Button variant="contained" onClick={() => handleCartAction('removeQuantity', book)} id="cart-remove-btn">Remove</Button>
                                 </div>
                             </div>
                         )}
@@ -379,22 +383,26 @@ function Cart() {
                         <p >hurray!!! your order is confirmed the order id is #123456 save the order id for further communication..</p>
                     </div>
                     <div className="cart-main-cnt order-main-cnt">
-                        <div className="order-cnt-main-txt">
-                            <p id="order-cnt-email-txt">Email us</p>
-                            <p id="order-cnt-contact-txt">Contact us</p>
-                            <p id="order-cnt-address-txt">Address</p>
+                        <div className="cart-main-cnt-contact-main-cnt">
+                            <div className="order-cnt-main-txt">
+                                <p id="order-cnt-email-txt">Email us</p>
+                                <p id="order-cnt-contact-txt">Contact us</p>
+                                <p id="order-cnt-address-txt">Address</p>
+                            </div>
+                            <div className="order-cnt-main-txt-info-cnt">
+                                <div className="order-cnt-main-txt-email-cnt">
+                                    <p>admin@bookstore.com</p>
+                                </div>
+                                <div className="order-cnt-main-txt-num-cnt">
+                                    <p>+91 8163475881</p>
+                                </div>
+                                <div className="order-cnt-main-txt-address-cnt">
+                                    <p>42, 14th Main, 15th Cross, Sector 4 ,opp to BDA complex, near Kumarakom restaurant, HSR Layout, Bangalore 560034</p>
+                                </div>
+                            </div>
+
                         </div>
-                        <div className="order-cnt-main-txt-info-cnt">
-                            <div className="order-cnt-main-txt-email-cnt">
-                                <p>admin@bookstore.com</p>
-                            </div>
-                            <div className="order-cnt-main-txt-num-cnt">
-                                <p>+91 8163475881</p>
-                            </div>
-                            <div className="order-cnt-main-txt-address-cnt">
-                                <p>42, 14th Main, 15th Cross, Sector 4 ,opp to BDA complex, near Kumarakom restaurant, HSR Layout, Bangalore 560034</p>
-                            </div>
-                        </div>
+
                         <div className="order-cnt-main-continue-btn-cnt">
                             <Button variant="contained" id="cart-place-order-btn" onClick={() => handleClick("continueShopping")}>CONTINUE SHOPING</Button>
                         </div>
