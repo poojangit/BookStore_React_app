@@ -122,7 +122,7 @@ function Cart() {
                 product_name: book.bookName,
                 product_quantity: book.quantityToBuy,
                 product_price: book.discountPrice,
-                order_date: new Date()
+                order_date: new Date().toISOString
             }));
 
             const res = await placeOrderApi({ orders: orderList });

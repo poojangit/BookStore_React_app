@@ -40,13 +40,17 @@
     // gap: 5px;
 }
 .view-book-1st-small-img,
-.view-book-2nd.-small-img {
+.view-book-2nd-small-img {
     width: 60px;
     height: 80px;
     border: 2px solid #d1d1d1;
     display: flex;
     justify-content: center;
     align-items: center;
+}
+
+.view-book-1st-small-img {
+    border: 2px solid #b13333;
 }
 .view-book-1st-small-img img,
 .view-book-2nd-small-img img {
@@ -184,7 +188,7 @@
 }
 .book-view-cust-review-main-cnt {
     display: flex;
-    flex-direction: column;
+    flex-direction: column-reverse;
     padding-top: 20px;
 }
 .book-view-cust-review-cnt {

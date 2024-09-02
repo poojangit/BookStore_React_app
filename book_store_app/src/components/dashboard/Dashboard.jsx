@@ -1,6 +1,5 @@
 import React from 'react';
 import NavBar from '../navbar/NavBar';
-import AllBooksSection from '../allbooks/AllBooks';
 import { useDispatch } from 'react-redux';
 import { useEffect } from 'react';
 import { getAllBooksApi } from '../../services/BookServices';
@@ -21,7 +20,6 @@ function Dashboard() {
   return (
     <div>
       <NavBar />
-      {/* <AllBooksSection /> */}
       <Outlet/>
     </div>
   );

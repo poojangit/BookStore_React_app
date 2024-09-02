@@ -1,13 +1,5 @@
 import axios from "axios";
 
-// const getToken = () => localStorage.getItem('token');
-
-// const headerConfig = () => ({
-//     headers: {
-//         'access-token': localStorage.getItem('token')
-//     }
-// });
-
 const headerConfig = () => {
     return {
       headers: {
@@ -40,8 +32,7 @@ export const addToCartApi = async (id) => {
 };
 
 export const updateCartApi = async (id,  quantityChange) => {
-    console.log(id);
-    console.log( quantityChange);
+    // console.log(id);
     const res = await axios.put(
         `https://bookstore.incubation.bridgelabz.com/bookstore_user/cart_item_quantity/${id}`,
         { quantityToBuy:  quantityChange },
@@ -51,7 +42,7 @@ export const updateCartApi = async (id,  quantityChange) => {
 };
 
 export const removeCartApi = async (id) => {
-    console.log(id);
+    // console.log(id);
     const res = await axios.delete(
         `https://bookstore.incubation.bridgelabz.com/bookstore_user/remove_cart_item/${id}`,
         headerConfig()
@@ -91,7 +82,7 @@ export const placeOrderApi = async (data) => {
 };
 
 export const getFeedbackApi = async (id) => {
-    console.log(id);
+    // console.log(id);
     const response = await axios.get(`https://bookstore.incubation.bridgelabz.com/bookstore_user/get/feedback/${id}`,
         headerConfig()
     );
@@ -101,7 +92,7 @@ export const getFeedbackApi = async (id) => {
 };
 
 export const postFeedbackApi = async (id, data) => {
-    console.log(id);
+    // console.log(id);
     console.log("Sending data:", data);
     const res = await axios.post(
         `https://bookstore.incubation.bridgelabz.com/bookstore_user/add/feedback/${id}`,

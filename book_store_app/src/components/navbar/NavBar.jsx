@@ -1,23 +1,21 @@
 import React from 'react';
 import booklogo from '../../assets/education.svg'
-import './NavBar.scss'
 import SearchIcon from '@mui/icons-material/Search';
 import { styled, alpha } from '@mui/material/styles';
 import InputBase from '@mui/material/InputBase';
 import PersonOutlineOutlinedIcon from '@mui/icons-material/PersonOutlineOutlined';
 import Menu from '@mui/material/Menu';
-import ShoppingCartOutlinedIcon from '@mui/icons-material/ShoppingCartOutlined';
 import MarkunreadMailboxOutlinedIcon from '@mui/icons-material/MarkunreadMailboxOutlined';
 import FavoriteBorderOutlinedIcon from '@mui/icons-material/FavoriteBorderOutlined';
 import Button from '@mui/material/Button';
 import { useNavigate } from 'react-router-dom';
-import AllBooks from '../allbooks/AllBooks';
 import IconButton from '@mui/material/IconButton';
 import ShoppingCartIcon from '@mui/icons-material/ShoppingCart';
 import Badge from '@mui/material/Badge';
 import { useSelector } from 'react-redux';
 import { useDispatch } from 'react-redux';
 import { addSearchBookValue } from '../../store/BookSearchSlice';
+import './NavBar.scss'
 
 const StyledBadge = styled(Badge)(({ theme }) => ({
     '& .MuiBadge-badge': {
@@ -78,10 +76,10 @@ function NavBar() {
     const [anchorEl, setAnchorEl] = React.useState(null);
     const cartItems = useSelector((store) => store.allCartDetails?.cartDetails)
     const bookSearch = useSelector((store) => store. bookSearchDetails?.searchBookValue.toLowerCase())
-    console.log(bookSearch);
-    console.log(cartItems);
+    // console.log("Searching" , bookSearch);
+    // console.log(cartItems);
     const totalQuantity = cartItems.reduce((acc, item) => acc + item.quantityToBuy, 0)
-    console.log(totalQuantity);
+    console.log("Items in cart ----> ",totalQuantity);
     const open = Boolean(anchorEl);
     const token = localStorage.getItem('token')
     const dispatch = useDispatch()
@@ -95,9 +93,6 @@ function NavBar() {
     const handleLogout = () => {
         localStorage.clear()
         window.location.reload()
-    }
-    const handleHome = () => {
-
     }
     const handleSearchChange = (e) => {
         const searchValue = e.target.value;
@@ -121,8 +116,7 @@ function NavBar() {
                             <StyledInputBase
                                 placeholder="Search…"
                                 inputProps={{ 'aria-label': 'search' }}
-                                onChange={handleSearchChange}
-                                
+                                onChange={handleSearchChange}  
                             />
                         </Search>
                     </div>
@@ -205,7 +199,6 @@ function NavBar() {
                                 <ShoppingCartIcon className='cart-icon' />
                             </StyledBadge>
                         </IconButton>
-                        {/* <ShoppingCartOutlinedIcon className='cart-icon' /> */}
                         <p>Cart</p>
                     </div>
                 </div>

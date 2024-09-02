@@ -2,28 +2,22 @@ import { React, useState } from 'react';
 import { useEffect } from "react";
 import './MyOrders.scss'
 import { useNavigate } from 'react-router-dom';
-import { useDispatch, useSelector } from 'react-redux';
+import { useSelector } from 'react-redux';
 import bookImage from '../../assets/book_image1.png'
-import DeleteIcon from '@mui/icons-material/Delete';
-import { deleteItemsFromMyOrderList } from '../../store/MyOrderListSlice';
 
 
 function MyOrders() {
-  const navigate = useNavigate()
-  console.log("Hello");
-  const hii = [];
-  console.log(hii);
 
+  const navigate = useNavigate()
   const myOrderListDetails = useSelector(store => store.myOrderListDetails?.myOrderListItems)
   console.log(myOrderListDetails);
   const [myOrderList, setMyOrderList] = useState(myOrderListDetails)
   const [myOrderListCount, setMyOrderListCount] = useState(myOrderList.length)
-
+  
   useEffect(() => {
     setMyOrderList(myOrderListDetails)
     setMyOrderListCount(myOrderListDetails.length)
   }, [myOrderListDetails])
-
 
   return (
     <>
@@ -39,7 +33,7 @@ function MyOrders() {
           </div>
           {myOrderList.length > 0 ? (
             myOrderList.map((book, index) => {
-              const orderDate = new Date(book.order_date); // Assuming you saved the date as 'order_date'
+              const orderDate = new Date(book.order_date); 
               const formattedDate = `${orderDate.toLocaleString('default', { month: 'long' })} ${orderDate.getDate()}, ${orderDate.getFullYear()}`;
 
               return (

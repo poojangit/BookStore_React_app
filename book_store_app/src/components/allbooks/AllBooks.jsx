@@ -9,11 +9,10 @@ import Books from '../books/Books';
 import Pagination from '@mui/material/Pagination';
 import Stack from '@mui/material/Stack';
 import { useSelector } from 'react-redux';
-import { Store } from '@mui/icons-material';
 // import BookStore from '../../bookstore/BookStore';
 
 function AllBooks() {
-    const [bookList, setBookList] = useState([]);
+    // const [bookList, setBookList] = useState([]);
     const [filteredBooks, setFilteredBooks] = useState([]);
     const [bookCount, setBookCount] = useState(0);
     const [currentPage, setCurrentPage] = useState(1);
@@ -21,7 +20,7 @@ function AllBooks() {
     const itemsPerPage = 8;
 
     const BookListDetails = useSelector((store) => store.allBookStore.AllBooks || []);
-    console.log(BookListDetails);
+    // console.log(BookListDetails);
     const searchValue = useSelector((store) => store.bookSearchDetails?.searchBookValue.toLowerCase());
 
     
@@ -90,7 +89,7 @@ function AllBooks() {
                     ))}
                 </div>
                 <Stack spacing={5}>
-                    <Pagination count={3} shape="rounded" onChange={handlePageChange} style={{ justifyContent: "center", margin: "30px 0px 40px 0px" }} />
+                    <Pagination count={5} shape="rounded" onChange={handlePageChange} style={{ justifyContent: "center", margin: "30px 0px 40px 0px" }} />
                 </Stack>
             </div>
         </>

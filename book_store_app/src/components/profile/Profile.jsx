@@ -60,7 +60,7 @@ function Profile() {
                     <div className='profile-personal-detail-cnt'>
                         <div className='personal-detail-edit-cnt'>
                             <p className='personal-detail-name'>Personal Details</p>
-                            <p className='personal-detail-edit'>Edit</p>
+                            <p className='personal-detail-edit' style={{ pointerEvents: 'none', opacity: 0.5 }}>Edit</p>
                         </div>
                         <div className='profile-full-name-main-cnt'>
                             <p className='profile-full-name-cnt'>Full Name</p>
@@ -151,12 +151,12 @@ function Profile() {
                                     fontSize: '0.75rem',
                                     // height : '20px'
 
-                                }}> Add New Address</Button>
+                                }} style={{ pointerEvents: 'none', opacity: 0.5 }} > Add New Address</Button>
                         </div>
 
                         <div className='profile-work-edit-main-cnt'>
                             <p className='profile-work-cnt'>1.Work</p>
-                            <p className='profile-edit-cnt'>Edit</p>
+                            <p className='profile-edit-cnt'  style={{ pointerEvents: 'none', opacity: 0.5 }}>Edit</p>
                         </div>
 
                         <div className='profile-address-main-cnt'>

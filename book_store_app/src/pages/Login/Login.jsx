@@ -8,9 +8,9 @@ import IconButton from '@mui/material/IconButton';
 import InputAdornment from '@mui/material/InputAdornment';
 import Visibility from '@mui/icons-material/Visibility';
 import VisibilityOff from '@mui/icons-material/VisibilityOff';
-import './Login.scss'
 import { useLocation, useNavigate } from 'react-router-dom';
 import { LoginPost, RegisterPost } from '../../services/UserServices';
+import './Login.scss'
 
 function Login() {
     const location = useLocation()
@@ -37,7 +37,6 @@ function Login() {
         passwordError: '',
         mobileNumberError: ''
     })
-    // const [isLogin, setIsLogin] = React.useState(true)
 
     const isLogin = location.pathname === '/login'
 
@@ -91,8 +90,9 @@ function Login() {
         if (isValidField) {
             console.log(loginObj);
             LoginPost(loginObj).then((response) => {
-                console.log(response); 
-                const token = response.data.result.accessToken; 
+                console.log(response);
+                const token = response.data.result.accessToken;
+                console.log(token);
                 localStorage.setItem("token", token);
                 console.log('Login success');
                 navigate('/')
@@ -166,7 +166,6 @@ function Login() {
         transform: 'translate(-50%, -50%)',
         width: { sm: 600 },
         height: { xs: 'auto', sm: 310 },
-        // bgcolor: 'background.paper',
         bgcolor: '#F5F5F5',
         borderRadius: '20px',
         boxShadow: 24,
@@ -182,8 +181,6 @@ function Login() {
                 </div>
                 <div className='login-signup-form-cnt'>
                     <div className='login-signup-head-cont'>
-                        {/* <p onClick={() => setIsLogin(true)}>LOGIN</p> */}
-                        {/* <p onClick={() => setIsLogin(false)}>SIGNUP</p> */}
                         <p
                             className={isLogin ? 'active' : ''}
                             onClick={() => handleNavigation('/login')}
@@ -240,10 +237,10 @@ function Login() {
                                     }}
                                     inputProps={{ style: { height: 10 } }}
                                 />
-                                <p className='forgot-txt'> Forgot Password</p>
+                                <p className='forgot-txt' style={{ pointerEvents: 'none', opacity: 0.5 }}> Forgot Password</p>
                             </div>
                             <Button style={{
-                                backgroundColor: '#A03037', // background color
+                                backgroundColor: '#A03037',
                                 color: '#FFFFFF',
                                 textTransform: 'none'
                             }} onClick={handleLogin} >Login</Button>
@@ -255,14 +252,14 @@ function Login() {
 
                             <div className='facebook-google-btn-cnt'>
                                 <Button style={{
-                                    backgroundColor: '#4266B2', // background color
+                                    backgroundColor: '#4266B2',
                                     color: '#FFFFFF',
                                     textTransform: 'none',
                                     minWidth: '135px'
                                 }}>Facebook</Button>
                                 <Button style={{
-                                    backgroundColor: '#F5F9F5', // background color
-                                    color: 'black', // text color
+                                    backgroundColor: '#F5F9F5',
+                                    color: 'black',
                                     border: '2px solid #E4E4E4',
                                     textTransform: 'none',
                                     minWidth: '135px'
@@ -342,7 +339,7 @@ function Login() {
                                 />
                             </div>
                             <Button style={{
-                                backgroundColor: '#A03037', // background color
+                                backgroundColor: '#A03037',
                                 color: '#FFFFFF',
                                 textTransform: 'none'
                             }} onClick={handleSignUp} >SignUp</Button>
@@ -351,7 +348,6 @@ function Login() {
                     )}
                 </div>
             </div>
-
         </Box>
     );
 }
