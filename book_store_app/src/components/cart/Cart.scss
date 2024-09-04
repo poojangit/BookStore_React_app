@@ -591,6 +591,10 @@
     justify-content: center;
 }
 
+#cart-item-totalQuantity {
+    margin-top: 10%;
+    font-size: smaller;
+}
 @media only screen and (min-width: 300px) and (max-width: 600px) {
     .cart-main-cnt {
         width: auto;

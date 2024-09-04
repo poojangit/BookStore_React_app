@@ -122,7 +122,7 @@ function Cart() {
                 product_name: book.bookName,
                 product_quantity: book.quantityToBuy,
                 product_price: book.discountPrice,
-                order_date: new Date().toISOString
+                order_date: new Date().toISOString()
             }));
 
             const res = await placeOrderApi({ orders: orderList });
@@ -139,7 +139,7 @@ function Cart() {
             navigate('/');
         }
     }
-    const openLoginModal = () => setLoginModalOpen(true);
+    const openLoginModal = () => setLoginModalOpen(true)
 
     const handlePlaceOrder = () => {
         if (!token) {
@@ -359,7 +359,9 @@ function Cart() {
                                             <div className="cart-item-details">
                                                 <span id="cart-item-discountedPrice">Rs.{book.discountPrice * book.quantityToBuy}</span>
                                                 <span id="cart-item-originalPrice">Rs.{book.price * book.quantityToBuy}</span>
+                                                
                                             </div>
+                                            <p id = "cart-item-totalQuantity" > Total Quantity : {book.quantityToBuy}</p>
                                         </div>
                                     </div>
                                 </div>

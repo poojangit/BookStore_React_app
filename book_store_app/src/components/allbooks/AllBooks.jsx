@@ -2,17 +2,15 @@ import React from 'react';
 import { useState, useEffect } from 'react';
 import FormControl from '@mui/material/FormControl';
 import InputLabel from '@mui/material/InputLabel';
-import Select, { SelectChangeEvent } from '@mui/material/Select';
+import Select from '@mui/material/Select';
 import MenuItem from '@mui/material/MenuItem';
 import './AllBooksSection.scss'
 import Books from '../books/Books';
 import Pagination from '@mui/material/Pagination';
 import Stack from '@mui/material/Stack';
 import { useSelector } from 'react-redux';
-// import BookStore from '../../bookstore/BookStore';
 
 function AllBooks() {
-    // const [bookList, setBookList] = useState([]);
     const [filteredBooks, setFilteredBooks] = useState([]);
     const [bookCount, setBookCount] = useState(0);
     const [currentPage, setCurrentPage] = useState(1);
@@ -27,7 +25,6 @@ function AllBooks() {
     useEffect(() => {
         if (BookListDetails.length) {
             let filtered = [...BookListDetails]
-
             if (searchValue) {
                 filtered = filtered.filter(book =>
                     book.bookName.toLowerCase().includes(searchValue) ||
@@ -89,7 +86,7 @@ function AllBooks() {
                     ))}
                 </div>
                 <Stack spacing={5}>
-                    <Pagination count={5} shape="rounded" onChange={handlePageChange} style={{ justifyContent: "center", margin: "30px 0px 40px 0px" }} />
+                    <Pagination count={8} shape="rounded" onChange={handlePageChange} style={{ justifyContent: "center", margin: "30px 0px 40px 0px" }} />
                 </Stack>
             </div>
         </>

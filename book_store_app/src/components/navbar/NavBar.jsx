@@ -75,8 +75,6 @@ function NavBar() {
     const navigate = useNavigate()
     const [anchorEl, setAnchorEl] = React.useState(null);
     const cartItems = useSelector((store) => store.allCartDetails?.cartDetails)
-    const bookSearch = useSelector((store) => store. bookSearchDetails?.searchBookValue.toLowerCase())
-    // console.log("Searching" , bookSearch);
     // console.log(cartItems);
     const totalQuantity = cartItems.reduce((acc, item) => acc + item.quantityToBuy, 0)
     console.log("Items in cart ----> ",totalQuantity);

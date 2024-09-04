@@ -1,4 +1,4 @@
-import React, { Children, useEffect, useState } from "react";
+import React, { useCallback, useEffect, useState } from "react";
 import './ViewBook.scss';
 import { useNavigate, useParams } from 'react-router-dom';
 import bookImage from '../../assets/book_image1.png';
@@ -13,8 +13,8 @@ import FavoriteIcon from '@mui/icons-material/Favorite';
 import AddIcon from '@mui/icons-material/Add';
 import RemoveIcon from '@mui/icons-material/Remove';
 import { toast } from "react-toastify";
-import { addToWishListApi, getFeedbackApi, getAllCartDetailsApi, postFeedbackApi, removeWishListApi, updateCartApi, getWishlistItemsApi } from "../../services/BookServices";
-import { addItemToWishList, deleteItemFromWishList, getWishList } from "../../store/WishListSlice";
+import { addToWishListApi, getFeedbackApi, getAllCartDetailsApi, postFeedbackApi, removeWishListApi, updateCartApi} from "../../services/BookServices";
+import { addItemToWishList, deleteItemFromWishList } from "../../store/WishListSlice";
 import { addBookToCart, decreaseQuantity, increaseQuantity, updateQuantity } from '../../store/CartSlice';
 import Avatar from '@mui/material/Avatar';
 
@@ -46,17 +46,19 @@ function ViewBook() {
         setAddWish(bookExists);
     }, [wishListDetails, bookid]);
 
-    useEffect(() => {
-        getFeedBack();
-    }, [token]);
 
-    async function getFeedBack() {
-        if (token) {
-            const res = await getFeedbackApi(bookid);
-            setFeedbackList(res.data.result);
+    const getFeedBack = useCallback( async () => {
+        if(token) {
+            const res = await getFeedbackApi(bookid)
+            setFeedbackList(res.data.result)
             console.log(res);
         }
-    }
+    }, [token, bookid])
+
+    useEffect(() => {
+        getFeedBack();
+    }, [token, getFeedBack]);
+
 
     async function handleClick(action) {
         if (action === 'addbook') {

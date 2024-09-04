@@ -3,7 +3,6 @@ import { useNavigate } from 'react-router-dom';
 import bookImage from '../../assets/book_image1.png'
 import StarOutlinedIcon from '@mui/icons-material/StarOutlined';
 import './Books.scss'
-import { useSelector } from 'react-redux';
 
 function Books({ bookDetails }) {
     const navigate = useNavigate()
@@ -13,7 +12,7 @@ function Books({ bookDetails }) {
         <>
             <div className='book-main-cnt' onClick={() => navigate(`/bookdetails/${bookDetails._id}`)}>
                 <div className='book-img-cnt'>
-                    <img src={bookImage} />
+                    <img src={bookImage} alt='bookimg' />
                 </div>
                 <div className='bookdetails-main-cnt'>
                     <p className='bookdetails-book-name'>{bookDetails?.bookName}</p>
