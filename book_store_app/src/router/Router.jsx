@@ -3,7 +3,6 @@ import { BrowserRouter, Route, Routes } from 'react-router-dom';
 import Login from '../pages/Login/Login';
 import AuthRoute from './AuthRoute';
 import ProtectedRoute from './ProtectedRoute';
-import NavBar from '../components/navbar/NavBar';
 import Dashboard from '../components/dashboard/Dashboard';
 import Profile from '../components/profile/Profile';
 import AllBooks from '../components/allbooks/AllBooks';

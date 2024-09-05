@@ -131,7 +131,7 @@ function ViewBook() {
 
       function stringAvatar(name) {
         if (!name) {
-            return ; 
+            return 
         }
     
         const initials = name.split(' ').map(word => word[0]).join('').toUpperCase();
